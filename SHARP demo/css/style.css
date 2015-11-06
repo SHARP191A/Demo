@@ -11,6 +11,14 @@ body{
 	font-size	: 11px;
 }
 
-select#dataCategoriesDropdown{
+
+div.dropdown{
+	float:left;
 	width:35%;
+	padding-right: 35px;
+}
+
+div#chartdiv{
+	width:100%;
+	float:left
 }

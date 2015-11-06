@@ -17,9 +17,13 @@
 
 
   <link rel="stylesheet" type="text/css" href="css/style.css">
-  <script src="amCharts/amcharts.js"></script>
+  <!-- <script src="amCharts/amcharts.js"></script> -->
+  <!-- <script src="amCharts/light.js"></script> -->
+  <script src="http://www.amcharts.com/lib/3/amcharts.js"></script>
+  <script src="http://www.amcharts.com/lib/3/serial.js"></script>
   <script src="amCharts/pie.js"></script>
-  <script src="amCharts/light.js"></script>
+  <script src="http://www.amcharts.com/lib/3/themes/light.js"></script>
+
 
   <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
 
@@ -33,12 +37,21 @@
 
   <h1 id = "headerTitle"></h1>
   <form>
-  <select id="dataCategoriesDropdown" class="form-control" onchange='getSelectedData()'></select>
-  <noscript><input type="submit" value="Submit"></noscript>
+  <div class = "dropdown">
+    <h3>Pie Chart</h3>
+    <select id="dataCategoriesDropdown" class="form-control" onchange='getSelectedData()'></select>
+  </div>
+
+  <div class = "dropdown">
+    <h3>Timeline Graph</h3>
+    <select id="timeCategoriesDropdown" class="form-control" onchange='getSelectedTime()'></select>
+  <div>
   </form>
 
 
   <div id="chartdiv"></div>
+
+
 </body>
 
 </html>
