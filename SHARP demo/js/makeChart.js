@@ -6,7 +6,7 @@
   function makePieChart(column){
     // document.write("<h1>SHARP CPO Data Analytics </br> Column:" + column + "</h1>");
 
-    pieChart = AmCharts.makeChart("chartdiv", {
+    pieChart = AmCharts.makeChart("piechartdiv", {
       "type": "pie",
       "startDuration": 0,
        "theme": "light",
@@ -67,8 +67,26 @@
 
   }
 
+  function makeRadarChart(column){
+    var radarChart = AmCharts.makeChart( "radarchartdiv", {
+      "type": "radar",
+      "theme": "light",
+      "dataProvider": parseJSON(column,false),
+      "startDuration": 2,
+      "graphs": [ {
+        "balloonText": "[[value]] type of logs created",
+        "bullet": "round",
+        "valueField": "litres"
+      } ],
+      "categoryField": "country",
+      "export": {
+        "enabled": true
+      }
+    } );
+  }
+
 function makeDateChart(){
-  var dateChart = AmCharts.makeChart("chartdiv", {
+  var dateChart = AmCharts.makeChart("timechartdiv", {
     "type": "serial",
     "theme": "light",
     "marginRight": 80,
@@ -136,11 +154,9 @@ dateChart.addListener("rendered", zoomChart);
 }
 
 
-var chartData = generateChartData();
-
 function makeTimeChart(column){
 
-var timeChart = AmCharts.makeChart("chartdiv", {
+var timeChart = AmCharts.makeChart("timechartdiv", {
     "type": "serial",
     "theme": "light",
     "marginRight": 80,
@@ -189,28 +205,4 @@ timeChart.addListener("dataUpdated", zoomChart);
   // different zoom methods can be used - zoomToIndexes, zoomToDates, zoomToCategoryValues
     timeChart.zoomToIndexes(chartData.length - 250, chartData.length - 100);
 
-}
-
-// generate some random data, quite different range
-function generateChartData() {
-    var chartData = [];
-    // current date
-    var firstDate = new Date();
-    // now set 500 minutes back
-    firstDate.setMinutes(firstDate.getDate() - 1000);
-
-    // and generate 500 data items
-    for (var i = 0; i < 500; i++) {
-        var newDate = new Date(firstDate);
-        // each time we add one minute
-        newDate.setMinutes(newDate.getMinutes() + i);
-        // some random number
-        var visits = Math.round(Math.random() * 40 + 10 + i + Math.random() * i / 5);
-        // add data item to the array
-        chartData.push({
-            date: newDate,
-            value: visits
-        });
-    }
-    return chartData;
 }

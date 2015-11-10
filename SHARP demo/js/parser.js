@@ -26,7 +26,10 @@ function parseJSON(column,percentBool){
     resultJSON.push({country:key, litres:map.get(key)});
     // document.write(key + "-->" + map.get(key) + "</br>");
   }
-
+  //Sort based on time
+  resultJSON.sort(function(a,b) {
+    return new Date(a.date).getTime() - new Date(b.date).getTime();
+  });
   console.log(JSON.stringify(resultJSON));
   return resultJSON;
 }

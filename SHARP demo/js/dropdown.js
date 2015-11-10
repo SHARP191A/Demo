@@ -2,17 +2,24 @@
 var dataCategoriesTitles = ["Document Life Cycle", "Document Type", "Log Event ID"];
 var dataCategoriesColumns = ["_c4", "_c6", "_c9"];
 
-var timeCategoriesTitles = [" ", "Dates Graph", "Daily Time Graph"];
+var timeCategoriesTitles = ["Dates Graph", "Daily Time Graph"];
 
 var currentColumn = dataCategoriesColumns[0];
-var currentTitle = dataCategoriesTitles[0];
 
 $( document ).ready(function() {
   initialize();
 });
 
 function initialize(){
-  var sel = document.getElementById('dataCategoriesDropdown');
+  var sel = document.getElementById('dataCategoriesDropdownPie');
+  for(var i = 0; i < dataCategoriesTitles.length; i++) {
+      var opt = document.createElement('option');
+      opt.innerHTML = dataCategoriesTitles[i];
+      opt.value = dataCategoriesColumns[i];
+      sel.appendChild(opt);
+  }
+
+  var sel = document.getElementById('dataCategoriesDropdownRadar');
   for(var i = 0; i < dataCategoriesTitles.length; i++) {
       var opt = document.createElement('option');
       opt.innerHTML = dataCategoriesTitles[i];
@@ -28,23 +35,23 @@ function initialize(){
       sel.appendChild(opt);
   }
   makePieChart(currentColumn);
-  setHeaderTitle(currentTitle);
-}
-
-function setHeaderTitle(currentTitle){
-  var e = document.getElementById("headerTitle");
-  e.innerHTML = "SHARP CPO Data Analytics";
+  makeRadarChart(currentColumn);
+  makeDateChart();
 }
 
 
-function getSelectedData(){
-  var data = document.getElementById("dataCategoriesDropdown");
+function getSelectedDataPie(){
+  var data = document.getElementById("dataCategoriesDropdownPie");
   currentColumn = data.options[data.selectedIndex].value;
-  currentTitle = data.options[data.selectedIndex].text;
 
-  console.log(currentColumn + ' ' + currentTitle);
   makePieChart(currentColumn);
-  setHeaderTitle(currentTitle);
+}
+
+function getSelectedDataRadar(){
+  var data = document.getElementById("dataCategoriesDropdownRadar");
+  currentColumn = data.options[data.selectedIndex].value;
+
+  makeRadarChart(currentColumn);
 }
 
 function getSelectedTime(){
