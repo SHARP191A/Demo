@@ -46,6 +46,16 @@
   </div>
   <hr>
 
+  <nav role="navigation" class="navbar navbar-default" id = "navBar">
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+      <li><a data-toggle="tab" onclick="getSelectedTab('Categorical')">Categorical</a></li>
+      <li><a data-toggle="tab" onclick="getSelectedTab('Time')">Time</a></li>
+      <li><a data-toggle="tab" onclick="getSelectedTab('Geographic')">Geographic</a></li>
+      <li><a data-toggle="tab" onclick="#menu3">Coming Soon</a></li>
+    </ul>
+   </nav>
+
   <div id = "chartRegion">
     <div class = "dropdown">
       <select id = "dataCategoriesDropdown" class="form-control" onchange='getSelectedData()'></select>

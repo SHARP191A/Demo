@@ -25,11 +25,16 @@ hr{
 	margin-bottom: 0px;
 }
 
+nav#navBar{
+	width:80%;
+	margin: auto;
+}
+
 div#chartRegion{
 	width:85%;
 	margin:auto;
 	padding-top: 20px;
-	background-color: #A6A6A6;
+	background-color: #D2D2D2;
 }
 
 #chartdiv {#chartdiv {

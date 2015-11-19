@@ -163,7 +163,7 @@ var timeChart = AmCharts.makeChart("chartdiv", {
     "dataProvider":  parseTimeJSON(),
     "valueAxes": [{
         "position": "left",
-        "title": "Log Activity"
+        "title": "Number Logs Created"
     }],
     "graphs": [{
         "id": "g1",
