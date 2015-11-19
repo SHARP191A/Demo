@@ -7,3 +7,8 @@
 	height		: 500px;
 	font-size	: 11px;
 }
+
+div#geographicmapdiv{
+	width	: 400px;
+	height	: 500px;
+}

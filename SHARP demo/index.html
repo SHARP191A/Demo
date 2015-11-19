@@ -1,6 +1,3 @@
-
-
-<div id="chartdiv"></div>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +13,6 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
 
 
-  <link rel="stylesheet" type="text/css" href="css/style.css">
   <!-- <script src="amCharts/amcharts.js"></script> -->
   <script src="http://www.amcharts.com/lib/3/amcharts.js"></script>
   <script src="http://www.amcharts.com/lib/3/radar.js"></script>
@@ -26,7 +22,11 @@
   <script src="http://www.amcharts.com/lib/3/themes/patterns.js"></script>
   <script src="http://www.amcharts.com/lib/3/themes/dark.js"></script>
   <script src="http://www.amcharts.com/lib/3/themes/chalk.js"></script>
-
+  <!-- heat map -->
+  <script src="http://www.amcharts.com/lib/3/ammap.js"></script>
+  <script src="http://www.amcharts.com/lib/3/maps/js/usaLow.js"></script>
+  <script src="http://www.amcharts.com/lib/3/themes/none.js"></script>
+  <script src="http://www.amcharts.com/lib/3/maps/js/worldLow.js"></script>
 
 
 
@@ -36,31 +36,22 @@
   <script src="js/parser.js"></script>
   <script src="js/dropdown.js"></script>
   <script src="js/makeChart.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
 
 </head>
 <body style = "font-family: 'Ubuntu', sans-serif;">
 
-  <h1 id = "headerTitle"><img id = "sharpLogo" src = "img/Sharp-Logo.png" alt = "Sharp">Cloud Portal Office Analytics</h1>
+  <div id = "header">
+    <h1 id = "headerTitle"><img id = "sharpLogo" src = "img/Sharp-Logo.png" alt = "Sharp">Cloud Portal Office Analytics</h1>
+  </div>
   <hr>
+
   <div id = "chartRegion">
     <div class = "dropdown">
-      <h3>Pie Chart</h3>
-      <select id = "dataCategoriesDropdownPie" class="form-control" onchange='getSelectedDataPie()'></select>
-      <div id="piechartdiv"></div>
+      <select id = "dataCategoriesDropdown" class="form-control" onchange='getSelectedData()'></select>
     </div>
+    <div id="chartdiv"></div>
 
-    <div class = "dropdown">
-      <h3>Radar Chart</h3>
-      <select id = "dataCategoriesDropdownRadar" class="form-control" onchange='getSelectedDataRadar()'></select>
-      <div id="radarchartdiv"></div>
-    </div>
-
-
-    <div class = "dropdown">
-      <h3>Timeline Graph</h3>
-      <select id="timeCategoriesDropdown" class="form-control" onchange='getSelectedTime()'></select>
-      <div id="timechartdiv"></div>
-    </div>
   </div>
 
 
