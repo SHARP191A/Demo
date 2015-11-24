@@ -374,8 +374,8 @@ function makeUSHeatMap(){
 
   valueLegend: {
     right: 10,
-    minValue: "little",
-    maxValue: "a lot!"
+    minValue: "No Activity",
+    maxValue: "Most Activity"
   },
 
   "export": {
@@ -383,13 +383,17 @@ function makeUSHeatMap(){
   }
 
 } );
+
+heatmap.addListener("clickMapObject", function (event) {
+    document.getElementById("icon").innerHTML = '<img id ="icon" src="img/user_single.png" alt="sharp">';
+});
 }
 
-function makeGlobalTrendsMap(){
+function makeGlobalTrendsMap2(){
   // create AmMap object
   var map = new AmCharts.AmMap();
-  // set path to images
-  map.pathToImages = "ammap/images/";
+  // set path to Images
+  map.pathToImages = "ammap/Images/";
 
   /* create data provider object
    map property is usually the same as the name of the map file.
@@ -421,3 +425,110 @@ function makeGlobalTrendsMap(){
   // write the map to container div
   map.write("chartdiv");
 }
+
+
+var map;
+
+var chart;
+var chartData = {};
+
+chartData.world = [
+    { source: "PDF", energy: 3882.1},
+    { source: "Image", energy: 2653.1},
+    { source: "Text", energy: 3278.3},
+    { source: "Video", energy: 610.5},
+    { source: "Audio", energy: 740.3}];
+
+chartData.US = [
+    { source: "PDF", energy: 842.9},
+    { source: "Image", energy: 588.7},
+    { source: "Text", energy: 498},
+    { source: "Video", energy: 190.2},
+    { source: "Audio", energy: 62.2}];
+
+chartData.CN = [
+    { source: "PDF", energy: 404.6},
+    { source: "Image", energy: 79.8},
+    { source: "Text", energy: 1537.4},
+    { source: "Video", energy: 15.9},
+    { source: "Audio", energy: 139.3}];
+
+chartData.CA = [
+    { source: "PDF", energy: 124.9},
+    { source: "Image", energy: 350.7},
+    { source: "Text", energy: 82.9},
+    { source: "Video", energy: 37},
+    { source: "Audio", energy: 39.8}];
+
+chartData.IN = [
+    { source: "PDF", energy: 148.5},
+    { source: "Image", energy: 46.7},
+    { source: "Text", energy: 245.8},
+    { source: "Video", energy: 3.8},
+    { source: "Audio", energy: 24}];
+
+chartData.JP = [
+    { source: "PDF", energy: 197.6},
+    { source: "Image", energy: 78.7},
+    { source: "Text", energy: 108.8},
+    { source: "Video", energy: 62.1},
+    { source: "Audio", energy: 16.7}];
+
+function makeGlobalTrendsMap() {
+    // *** CREATE CHART *********************************************************
+    // PIE CHART
+    chart = new AmCharts.AmPieChart();
+
+    // title of the chart
+    chart.addLabel("0", "!20", "World", "center", 16);
+
+    chart.backgroundAlpha = 0.4;
+    chart.backgroundColor = "#000000";
+    chart.dataProvider = chartData.world;
+    chart.titleField = "source";
+    chart.valueField = "energy";
+    chart.sequencedAnimation = true;
+    chart.startEffect = "elastic";
+    chart.labelsEnabled = false;
+    chart.labelText = "[[title]]";
+    chart.startDuration = 2;
+    chart.labelRadius = 10;
+
+    // WRITE
+    chart.write("mapdiv");
+
+    // *** CREATE MAP ***********************************************************
+
+    map = new AmCharts.AmMap();
+    map.pathToImages = "http://www.ammap.com/lib/Images/";
+    //map.panEventsEnabled = true; // this line enables pinch-zooming and dragging on touch devices
+    var dataProvider = {
+        mapVar: AmCharts.maps.worldLow
+    };
+
+    map.areasSettings = {
+        unlistedAreasColor: "#DDDDDD",
+        rollOverOutlineColor: "#FFFFFF",
+        rollOverColor: "#CC0000" };
+
+    dataProvider.areas = [
+        { title: "United States", id: "US", selectable: true },
+        { title: "China", id: "CN", selectable: true },
+        { title: "Canada", id: "CA", selectable: true },
+        { title: "India", id: "IN", selectable: true },
+        { title: "Japan", id: "JP", selectable: true }
+    ];
+
+    map.dataProvider = dataProvider;
+    map.write("chartdiv");
+
+    map.addListener("clickMapObject", function (event) {
+        if (event.mapObject.id != undefined && chartData[event.mapObject.id] != undefined) {
+            chart.dataProvider = chartData[event.mapObject.id];
+            chart.clearLabels();
+            chart.addLabel("0", "!20", event.mapObject.title, "center", 16);
+            chart.validateData();
+        }
+
+    });
+  }

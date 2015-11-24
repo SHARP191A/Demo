@@ -2,15 +2,19 @@ body{
 	padding:20px;
 	width:100%;
 	margin: auto;
+	background-color: #000016;
 }
 
 div#header{
 	margin:auto;
+	padding-bottom: 10px;
+	padding-left: 20px;
 }
 
 h1#headerTitle{
 	margin: auto;
 	padding-top:20px;
+	color: #D3D3D3;
 
 }
 
@@ -18,7 +22,7 @@ img#sharpLogo{
 	width:34%;
 	float:left;
 	padding-right: 12px;
-	padding-left: 200px;
+	padding-left: 70px;
 }
 
 hr{
@@ -26,8 +30,11 @@ hr{
 }
 
 nav#navBar{
-	width:80%;
+	width:87%;
 	margin: auto;
+	margin-top:12px;
+	border-radius: 4px;
+	margin-bottom: 7px;
 }
 
 div#chartRegion{
@@ -35,29 +42,19 @@ div#chartRegion{
 	margin:auto;
 	padding-top: 20px;
 	background-color: #D2D2D2;
+	border-radius: 10px;
 }
 
 #chartdiv {#chartdiv {
 	float : left;
 	width		: 100%;
-	height		: 500px;
+	height		: 550px;
 	font-size	: 11px;
 }
 	padding-top :20px;
 	width		: 100%;
-	height		: 500px;
+	height		: 550px;
 	font-size	: 11px;
-}
-
-#timechartdiv {#timechartdiv {
-	float : right;
-
-	width		: 100%;
-	height		: 500px;
-	font-size	: 11px;
-}
-	width : 100%;
-	height	: 500px;
 }
 
 
@@ -68,5 +65,20 @@ div.dropdown{
 	border-radius: 7px;*/
   margin:auto;
 	padding-top: 3px;
+	padding-bottom: 5px;
 	width:35%;
+}
+
+#icon{
+	 width: 240px;
+	 padding-left:35px;
+	 margin-bottom: 20px;
+	 border-radius: 5px;
+}
+
+h2{
+	padding-left:30px;
+}
+h4{
+	padding-left:30px;
 }

@@ -34,7 +34,7 @@
 
   <script src="js/log2SharpTestDataJSON.js"></script>
   <script src="js/parser.js"></script>
-  <script src="js/dropdown.js"></script>
+  <script src="js/view.js"></script>
   <script src="js/makeChart.js"></script>
   <link rel="stylesheet" type="text/css" href="css/style.css">
 
@@ -44,15 +44,15 @@
   <div id = "header">
     <h1 id = "headerTitle"><img id = "sharpLogo" src = "img/Sharp-Logo.png" alt = "Sharp">Cloud Portal Office Analytics</h1>
   </div>
-  <hr>
+  <!-- <hr> -->
 
   <nav role="navigation" class="navbar navbar-default" id = "navBar">
     <ul class="nav nav-tabs">
-      <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+      <li class="active"><a data-toggle="tab" onclick="getSelectedTab('Home')">Home</a></li>
       <li><a data-toggle="tab" onclick="getSelectedTab('Categorical')">Categorical</a></li>
       <li><a data-toggle="tab" onclick="getSelectedTab('Time')">Time</a></li>
       <li><a data-toggle="tab" onclick="getSelectedTab('Geographic')">Geographic</a></li>
-      <li><a data-toggle="tab" onclick="#menu3">Coming Soon</a></li>
+      <li><a data-toggle="tab" onclick="getSelectedTab('Coming Soon')">Coming Soon</a></li>
     </ul>
    </nav>
 
@@ -60,11 +60,9 @@
     <div class = "dropdown">
       <select id = "dataCategoriesDropdown" class="form-control" onchange='getSelectedData()'></select>
     </div>
-    <div id="chartdiv"></div>
-
-  </div>
-
-
+    <div id="chartdiv"> </div>
+      <div id="icon" style="width: 20%; height: 20%; position: absolute; bottom: 0; right: 30;"></div>
+    <div id="mapdiv" style="width: 20%; height: 20%; position: absolute; bottom: 0; right: 30;"></div>
 
 
 </body>
