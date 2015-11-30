@@ -46,7 +46,6 @@ function parseDateJSON(){
   for(var i = 0; i < rowLength; i++){
     var key = json.report.section.table.rows.row[i][column];
     key = key.split(" ")[0];
-    //document.write(key + "</br>");
     if(map.has(key)){
       map.set(key, map.get(key)+1);
     }
@@ -63,7 +62,9 @@ function parseDateJSON(){
         resultJSON.push({date:key, value:map.get(key)});
         //document.write(key + "-->" + map.get(key) + "</br>");
   }
-
+  resultJSON.sort(function(a,b) {
+    return new Date(a.date).getTime() - new Date(b.date).getTime();
+  });
   console.log(JSON.stringify(resultJSON));
   return resultJSON;
 }

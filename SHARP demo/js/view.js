@@ -12,24 +12,10 @@ $( document ).ready(function() {
 });
 
 function initialize(){
-  // var sel = document.getElementById('dataCategoriesDropdown');
-  // for(var i = 0; i < dataCategoriesTitles.length; i++) {
-  //     var opt = document.createElement('option');
-  //     opt.innerHTML = dataCategoriesTitles[i];
-  //     opt.value = dataCategoriesColumns[i];
-  //     sel.appendChild(opt);
-  // }
-  // makePieChart(currentValue);
-  // makeRadarChart(currentColumn);
-  //makeDateChart();
-  //makeUSHeatMap();
-  // document.getElementById("icon").style.visibility = "hidden";
-
   getSelectedTab('Home');
 }
 
 function getSelectedTab(tab){
-  clearDropdown();
   if(tab == "Categorical"){
     makePieChart(currentValue);
   }
@@ -40,7 +26,7 @@ function getSelectedTab(tab){
     makeUSHeatMap();
   }
   else if (tab == "Coming Soon"){
-    makeGlobalTrendsMap();
+
   }
   setDropdown(tab);
 
@@ -80,17 +66,14 @@ function setDropdown(tab){
   }
   else if (tab == "Coming Soon"){
     //document.getElementById("chartdiv").innerHTML = '<img id = "userStatistics" src = "img/user_statistics.png" width = "85%" style = "padding-left:120px; padding-top:40px" alt = "Sharp">';
-    document.getElementById("chartdiv").innerHTML = '<h2>Coming Soon Section</h2>';
+    document.getElementById("chartdiv").innerHTML = '<h2>Coming Soon Section</h2><img id = "userStatistics" src = "img/user_statistics.png" width = "85%" style = "padding-left:120px; padding-top:40px" alt = "Sharp">';
 
   }
 }
 
 function clearDropdown(){
   var select = document.getElementById("dataCategoriesDropdown");
-  var length = select.options.length;
-  for (i = 0; i < length; i++) {
-    select.options[i] = null;
-  }
+  select.options.length = 0;
 }
 
 function getSelectedData(){
@@ -119,7 +102,6 @@ function getSelectedData(){
   else if (currentText == "US Heat Map"){
     makeUSHeatMap();
   }
-
 }
 
 //helper function
