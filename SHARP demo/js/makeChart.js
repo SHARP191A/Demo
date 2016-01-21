@@ -1,11 +1,7 @@
   var pieChart;
   var dateChart;
 
- //parseDateJSON();
-
   function makePieChart(column){
-    // document.write("<h1>SHARP CPO Data Analytics </br> Column:" + column + "</h1>");
-
     pieChart = AmCharts.makeChart("chartdiv", {
       "type": "pie",
       "startDuration": 0,
@@ -40,7 +36,7 @@
           }
         }]
       },
-      "dataProvider": parseJSON(column,false),
+      "dataProvider": parseGeneratedJSON(column),
       "valueField": "litres",
       "titleField": "country",
       "export": {
@@ -145,7 +141,7 @@ function makeDateChart(){
     "export": {
         "enabled": true
     },
-    "dataProvider":  parseDateJSON()
+    "dataProvider":   parseDateOfGeneratedJSON()
 });
 
 dateChart.addListener("rendered", zoomChart);

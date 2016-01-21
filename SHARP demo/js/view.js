@@ -1,6 +1,6 @@
 //default data column
 var dataCategoriesTitles = ["Document Life Cycle", "Document Type", "Log Event ID","Map Key"];
-var dataCategoriesColumns = ["_c4", "_c6", "_c9", "_c15"];
+var dataCategoriesColumns = ["docLifeCycle", "docType", "eventId", "_c15"];
 
 var timeCategoriesTitles = ["Dates Graph", "Daily Time Graph"];
 var geographicCategoriesTitles = ["US Heat Map","Global Trends"];

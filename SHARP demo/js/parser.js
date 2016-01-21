@@ -1,12 +1,14 @@
-function parseJSON(column,percentBool){
+//generated list of n number of JSON objects
+var generatedJSON = generateJSON(1000);
+
+function parseGeneratedJSON(column){
   var resultJSON = [];
   var map = new Map();
-  var rowLength = json.report.section.table.rows.row.length;
-
+  var rowLength = generatedJSON.length;
 
   //fill in map
   for(var i = 0; i < rowLength; i++){
-    var key = json.report.section.table.rows.row[i][column];
+    var key = generatedJSON[i][column];
     if(map.has(key)){
       map.set(key, map.get(key)+1);
     }
@@ -15,52 +17,37 @@ function parseJSON(column,percentBool){
     }
   }
 
-  //convert values to percentages
   for (var key of map.keys()) {
-      if(percentBool){
-        map.set(key, (map.get(key)/rowLength).toFixed(4) * 100);
-      }
-      else{
         map.set(key, map.get(key));
-      }
     resultJSON.push({country:key, litres:map.get(key)});
-    // document.write(key + "-->" + map.get(key) + "</br>");
   }
-  //Sort based on time
-  resultJSON.sort(function(a,b) {
-    return new Date(a.date).getTime() - new Date(b.date).getTime();
-  });
   console.log(JSON.stringify(resultJSON));
   return resultJSON;
 }
 
-function parseDateJSON(){
-  column = "_c8";
+function parseDateOfGeneratedJSON(){
+  column = "eventDate";
   var resultJSON = [];
   var map = new Map();
-  var rowLength = json.report.section.table.rows.row.length;
-
+  var rowLength = generatedJSON.length;
 
   //fill in map
-  var counter = 0;
   for(var i = 0; i < rowLength; i++){
-    var key = json.report.section.table.rows.row[i][column];
-    key = key.split(" ")[0];
+    var day = generatedJSON[i][column].getDay() + 1;
+    var month = generatedJSON[i][column].getMonth() + 1;
+    if (day < 10){day = "0" + day;}
+    if (month < 10){ month = "0" + month;}
+    var key = generatedJSON[i][column].getFullYear() + "-" + day + "-" + month;
     if(map.has(key)){
       map.set(key, map.get(key)+1);
     }
     else{
       map.set(key, 1);
     }
-    counter++;
   }
-  //test debug, take out later
-  console.log("COUNTER: ", counter);
-  //convert values to percentages
   for (var key of map.keys()) {
         map.set(key, map.get(key));
         resultJSON.push({date:key, value:map.get(key)});
-        //document.write(key + "-->" + map.get(key) + "</br>");
   }
   resultJSON.sort(function(a,b) {
     return new Date(a.date).getTime() - new Date(b.date).getTime();
@@ -69,6 +56,8 @@ function parseDateJSON(){
   return resultJSON;
 }
 
+
+// parse time function still using static data.
 function parseTimeJSON(){
   column = "_c8";
   var resultJSON = [];
@@ -94,7 +83,6 @@ function parseTimeJSON(){
         var now = new Date();
         var dateCreated = new Date(0, 0, 0, hour, minutes, 1, 1);
         resultJSON.push({date:dateCreated, value:map.get(key)});
-        // document.write(key + "-->" + map.get(key) + "</br>");
   }
 
   //Sort based on time
