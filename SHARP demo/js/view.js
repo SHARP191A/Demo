@@ -1,7 +1,7 @@
 //default data column
+var homeCategoriesTitles = ["Welcome", "Help", "About"];
 var dataCategoriesTitles = ["Document Life Cycle", "Document Type", "Log Event ID","Map Key"];
 var dataCategoriesColumns = ["docLifeCycle", "docType", "eventId", "_c15"];
-
 var timeCategoriesTitles = ["Dates Graph", "Daily Time Graph"];
 var geographicCategoriesTitles = ["US Heat Map","Global Trends"];
 
@@ -16,7 +16,10 @@ function initialize(){
 }
 
 function getSelectedTab(tab){
-  if(tab == "Categorical"){
+  if(tab == "Home"){
+    <!--!! Design and Construct Welcome Page ASAP------------------------------------------------- -->
+  }
+  else if(tab == "Categorical"){
     makePieChart(currentValue);
   }
   else if (tab == "Time"){
@@ -39,8 +42,12 @@ function setDropdown(tab){
   document.getElementById("icon").innerHTML = '';
 
   if(tab == "Home"){
+    for(var i = 0; i < homeCategoriesTitles.length; i++) {
     document.getElementById("chartdiv").innerHTML = '<h2>Welcome to CPO Analytics!</h2><h4>Select a tab to see a visualization</h4> <img id = "userStatistics" src = "img/home_image.png" width = "50%" style = "margin-left:270px; padding-top:0px" alt = "Sharp">';
-
+    var opt = document.createElement('option');
+    opt.innerHTML = homeCategoriesTitles[i];
+    sel.appendChild(opt);
+    }
   }
   else if(tab == "Categorical"){
     for(var i = 0; i < dataCategoriesTitles.length; i++) {

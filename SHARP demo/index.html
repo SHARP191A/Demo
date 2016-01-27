@@ -45,17 +45,20 @@
 <body style = "font-family: 'Ubuntu', sans-serif;">
 
   <div id = "header">
-    <h1 id = "headerTitle"><img id = "sharpLogo" src = "img/Sharp-Logo.png" alt = "Sharp">Cloud Portal Office Analytics</h1>
+    <h1 id = "headerTitle"><img id = "sharpLogo" src = "img/Sharp-Logo.png" alt = "Sharp"><small>Cloud Portal Office Analytics</small></h1>
   </div>
   <!-- <hr> -->
 
   <nav role="navigation" class="navbar navbar-default" id = "navBar">
     <ul class="nav nav-tabs">
-      <li class="active"><a data-toggle="tab" onclick="getSelectedTab('Home')">Home</a></li>
+      <li class="active"><form method="post">
+      <input type="image" src="img\refresh.svg" alt="Refresh" value="Refresh" onclick="window.location.reload()"></form>
+      <li><a data-toggle="tab" onclick="getSelectedTab('Home')">Home</a></li>
       <li><a data-toggle="tab" onclick="getSelectedTab('Categorical')">Categorical</a></li>
       <li><a data-toggle="tab" onclick="getSelectedTab('Time')">Time</a></li>
       <li><a data-toggle="tab" onclick="getSelectedTab('Geographic')">Geographic</a></li>
-      <li><a data-toggle="tab" onclick="getSelectedTab('Coming Soon')">Coming Soon</a></li>
+      <!--<li><a data-toggle="tab" onclick="getSelectedTab('Coming Soon')">Coming Soon</a></li> -->
+
     </ul>
    </nav>
 
@@ -67,6 +70,9 @@
     <div id="chartdiv"> </div>
     <div id="icon" style="width: 20%; height: 20%; position: absolute; bottom: 0; right: 30;"></div>
     <div id="mapdiv" style="width: 20%; height: 20%; position: absolute; bottom: 0; right: 30;"></div>
+
+    <!--<form method="post">
+    <input type="image" src="img\refresh.svg" alt="Refresh" value="Refresh" onclick="window.location.reload()"></form>-->
 </div>
 
 </body>
