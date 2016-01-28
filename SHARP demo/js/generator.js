@@ -38,7 +38,28 @@ function getRandomValues(field){
     var weight = [.65, .04, .28, .03];
     return getRandomItem(docLifeCycle_categories,weight);
   }
+    else if (field == "docUUID"){
+    var docUUID_categories = ["fkfc2wmg", "lshn3x2k", "q9onu5ma", "tam7ht9d","pmq3t6zi", "alv1zice", "ou9vmxfe"];
+    var weight = [.45, .04, .28, .03, .05, .05, .10];
+    return getRandomItem(docLifeCycle_categories,weight);
+  }
+    else if (field == "principalName"){
+    var principalName_categories = ["project", "undefined", "deleted", "null"];
+    var weight = [.65, .04, .28, .03];
+    return getRandomItem(docLifeCycle_categories,weight);
+  }
+    else if (field == "entity-type"){
+    var entity-type_categories = ["project", "undefined", "deleted", "null"];
+    var weight = [.65, .04, .28, .03];
+    return getRandomItem(docLifeCycle_categories,weight);
+  }
+    else if (field == "tenantId"){
+    var tenantId_categories = ["yzt7u9yb", "t8n1weqv", "bmzesczr", "po4rjrof"];
+    var weight = [.65, .04, .28, .03];
+    return getRandomItem(docLifeCycle_categories,weight);
+  }
 }
+
 
 //generate a list of x number of JSON objects, each represent 1 log entry
 function generateJSON(numberOfLogs){
@@ -46,14 +67,14 @@ function generateJSON(numberOfLogs){
   for (i = 0; i < numberOfLogs; i++){
     var randDate = randomDate(new Date(2015, 6, 2), new Date());
     var logEntry =  {
-          "entity-type": "logEntry",
+          "entity-type": getRandomValues("logEntry"),
           "category": "eventDocumentCategory",
-          "principalName": "9",
+          "principalName": getRandomValues("principalName"),
           "comment": "Document does not exist anymore!",
           "docLifeCycle": getRandomValues("docLifeCycle"),
           "docPath": "/16a22186-f547-44f5-813d-2c9fd69368fe/UserWorkspaces/9/Copy of v1demos.xls._1452712490363_.trashed",
           "docType": getRandomValues("docType"),
-          "docUUID": "bca746c7-b946-497d-be29-5be2c547b739",
+          "docUUID": getRandomValues("docUUID"),
           "eventId": getRandomValues("eventId"),
           "repositoryId": "default",
           "eventDate": randDate,
@@ -62,7 +83,7 @@ function generateJSON(numberOfLogs){
           "id": 1353433,
           "logDate": randDate,
           "extended": {
-            "tenantId": "16a22186-f547-44f5-813d-2c9fd69368fe",
+            "tenantId": getRandomValues("tenantId"),
             "name": "Copy of v1demos.xls._1452712490363_.trashed",
             "parentPath": "/16a22186-f547-44f5-813d-2c9fd69368fe/UserWorkspaces/9"}
     }
