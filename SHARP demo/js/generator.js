@@ -22,6 +22,11 @@ var getRandomItem = function(list, weight) {
     }
 };
 
+function generateRandomNumber(min, max)
+{
+	return (Math.random()*max + min);
+};
+
 function getRandomValues(field){
   if(field == "docType"){
     var docType_categories = ["File", "Drawings", "Workspace", "UserProfile", "Picture", "EmployeeRecord", "Contract", "Unit", "Folder", "BillOfLading"];
@@ -44,9 +49,7 @@ function getRandomValues(field){
     return getRandomItem(docLifeCycle_categories,weight);
   }
     else if (field == "principalName"){
-    var principalName_categories = ["project", "undefined", "deleted", "null"];
-    var weight = [.65, .04, .28, .03];
-    return getRandomItem(docLifeCycle_categories,weight);
+    return generateRandomNumber(1000,9999);
   }
     else if (field == "entity-type"){
     var entity-type_categories = ["project", "undefined", "deleted", "null"];
@@ -54,11 +57,19 @@ function getRandomValues(field){
     return getRandomItem(docLifeCycle_categories,weight);
   }
     else if (field == "tenantId"){
-    var tenantId_categories = ["yzt7u9yb", "t8n1weqv", "bmzesczr", "po4rjrof"];
-    var weight = [.65, .04, .28, .03];
+    var tenantId_categories = ["UC Irvine", "United Postal Service", "SHARP Labs", "LinkedIn", "Comcast", "Irvine Company",
+	"Cisco", "Blizzard", "MSC Software", "Tallan"];
+    var weight = [.1, .1, .1, .1, .1, .1, .1, .1, .1, .1];
     return getRandomItem(docLifeCycle_categories,weight);
   }
+    else if (field == "device-Type"){
+    var device-Type_categories = ["Desktop/Laptop", "Phone", "Tablet", "Smart-Whiteboard"];
+    var weight = [.45, 0.15, 0.25, 0.05];
+    return getRandomItem(eventId_categories,weight);
+  }
 }
+
+
 
 
 //generate a list of x number of JSON objects, each represent 1 log entry
