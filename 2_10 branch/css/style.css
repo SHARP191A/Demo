@@ -1,0 +1,181 @@
+body{
+	padding:20px;
+	width:100%;
+	margin: auto;
+	background-color: #000016;
+}
+
+div#header{
+	margin:auto;
+	padding-bottom: 10px;
+	padding-left: 20px;
+}
+
+h1#headerTitle{
+	margin: auto;
+	padding-top:20px;
+	color: #D3D3D3;
+
+}
+
+img#sharpLogo{
+	width:34%;
+	float:left;
+	padding-right: 12px;
+	padding-left: 70px;
+}
+
+hr{
+	margin-bottom: 0px;
+}
+
+nav#navBar{
+	width:87%;
+	margin: auto;
+	margin-top:12px;
+	border-radius: 4px;
+	margin-bottom: 7px;
+}
+
+div#chartRegion{
+	width:85%;
+	margin:auto;
+	padding-top: 20px;
+	background-color: #D2D2D2;
+	border-radius: 10px;
+}
+
+
+#chartdiv {#chartdiv {
+	float : left;
+	width		: 100%;
+	height		: 550px;
+	font-size	: 11px;
+}
+	padding-top :20px;
+	width		: 100%;
+	height		: 550px;
+	font-size	: 11px;
+}
+
+
+div.dropdown{
+  margin:auto;
+	padding-top: 3px;
+	padding-bottom: 5px;
+	width:45%;
+}
+
+
+.dropdown-menu .sub-menu {
+    left: 100%;
+    position: absolute;
+    top: 0;
+    visibility: hidden;
+    margin-top: -1px;
+}
+
+.dropdown-menu li:hover .sub-menu {
+    visibility: visible;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+#icon{
+	 width: 240px;
+	 padding-left:35px;
+	 margin-bottom: 20px;
+	 border-radius: 5px;
+}
+
+h2{
+	padding-left:30px;
+}
+h4{
+	padding-left:30px;
+}
+
+html{
+	height:100%;
+}
+
+body{
+	padding:0px;
+	width:100%;
+	height:100%;
+	margin: 0px;
+	background-color: #000016;
+}
+
+.pageContent{
+	border-radius:20px;
+}
+
+.row{
+	margin:0px;
+	margin-bottom:5px;
+	margin-top:5px;
+}
+
+#pageContent{
+	height:550px;
+}
+
+.sideColumn{
+	height: 100%;
+	overflow:visible;
+	border-radius:20px;
+
+}
+
+.leftSideColumnTextBox{
+	height:25%;
+	background-color:white;
+	border-radius:15px;
+	text-align:center;
+
+}
+
+.rightSideColumnTextBox{
+	height:33%;
+	background-color:white;
+	border-radius:15px;
+	text-align:center;
+}
+
+.chartsColumn{
+	height:100%;
+}
+
+.chartSpaceRow{
+	height:50%;
+	background-color: #D2D2D2;
+	text-align:center;
+	border-radius:20px;
+}
+
+.chartSpace{
+	height:100%;
+	border-radius:20px;
+}
+
+img#sharpLogo{
+	max-width:100%;
+	max-height:100%;
+}
+
+#navBar{
+	background-color: white;
+	border-radius:20px;
+
+}
+
+.navLink{
+	border: thin solid grey;
+	text-align: center;
+	border-radius:5px;
+}
+
+/*NATE'S Changes*/

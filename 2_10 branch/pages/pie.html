@@ -1,0 +1,18 @@
+<script>
+$(document).ready(function() {
+    makePieChart("chartdiv", true, "docLifeCycle");
+});
+</script>
+
+
+<div id = "chartRegion" >
+  <div class = "pieDropdown dropdown">
+    <select id = "pieOptions" class="form-control select" onchange="createPieChart()">
+        <option value="docLifeCycle">Document Life Cycle</option>
+        <option value="docType">Document Type</option>
+        <option value="userType">User Type</option>
+        <option value="eventId">Event Logged Type</option>
+     </select>
+</div>
+<div id="chartdiv"> </div>
+</div>

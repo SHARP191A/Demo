@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CPO Analytics</title>
+
+  <!-- jquery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+
+
+  <script src="http://www.amcharts.com/lib/3/amcharts.js"></script>
+  <script src="http://www.amcharts.com/lib/3/radar.js"></script>
+  <script src="http://www.amcharts.com/lib/3/serial.js"></script>
+  <script src="http://www.amcharts.com/lib/3/pie.js"></script>
+
+  <script src="http://www.amcharts.com/lib/3/themes/patterns.js"></script>
+  <script src="http://www.amcharts.com/lib/3/themes/light.js"></script>
+
+  <script src="http://www.amcharts.com/lib/3/themes/dark.js"></script>
+  <script src="http://www.amcharts.com/lib/3/themes/chalk.js"></script>
+
+  <!-- heat map -->
+  <script src="http://www.amcharts.com/lib/3/ammap.js"></script>
+  <script src="http://www.amcharts.com/lib/3/maps/js/usaLow.js"></script>
+  <script src="http://www.amcharts.com/lib/3/themes/none.js"></script>
+  <script src="http://www.amcharts.com/lib/3/maps/js/worldLow.js"></script>
+
+  <!-- google font -->
+  <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+
+  <script src="js/generator.js"></script>
+  <script src="js/parser.js"></script>
+  <script src="js/handler.js"></script>
+  <script src="js/makeChart.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/timelineStyle.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+
+
+</head>
+<body style = "font-family: 'Ubuntu', sans-serif;" onload="changePage('pages/home.html')">
+
+  <div id = "header">
+    <h1 id = "headerTitle"><img id = "sharpLogo" src = "img/Sharp-Logo.png" alt = "Sharp"><small>Cloud Portal Office Analytics</small></h1>
+  </div>
+  <!-- <hr> -->
+
+  <nav role="navigation" class="navbar navbar-default" id = "navBar">
+    <ul class="nav nav-tabs">
+
+      <li><a data-toggle="tab" onclick="changePage('pages/home.html')">Home</a></li>
+      <li><a data-toggle="tab" onclick="changePage('pages/pie.html')">Pie Chart</a></li>
+      <li><a data-toggle="tab" onclick="changePage('pages/timeline.html')">Timeline</a></li>
+      <li><a data-toggle="tab" onclick="changePage('pages/geographic.html')">Geographic</a></li>
+      <li style = "float:right;"><a data-toggle="tab" onclick="randomizeData()"><img src="img/refresh.svg" style = "height:27px"/></a></li>
+      <!-- <li class="dropdown">
+        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Charts<b class="caret"></b></a>
+        <ul class="dropdown-menu" id="menu1">
+          <li><a data-toggle="tab" onclick="changePage('pages/pie.html')">Pie Chart</a></li>
+          <li><a data-toggle="tab" onclick="changePage('pages/timeline.html')">Timeline</a></li>
+          <li class="divider"></li>
+          <li><a data-toggle="tab" onclick="changePage('pages/geographic.html')">Geographic</a></li>
+        </ul>
+      </li> -->
+
+    </ul>
+   </nav>
+
+    <div id="chartdivTemplate"> </div>
+
+</body>
+
+</html>
