@@ -22,7 +22,9 @@ function createHome(){
   makeTimeline("chartSpace2","All","All");
   makePieChart("right1", false, "userType");
   makeSimplePieChart("right2","eventId");
-
+  setAverageStoragePerPrincipal();
+  setAveragePrincipalsPerTenant();
+  
 }
 
 function createPieChart(){
@@ -51,4 +53,18 @@ function createGeographic(){
   else if (currentValue == "US Heat Map"){
     makeUSHeatMap();
   }
+}
+
+function setAverageStoragePerPrincipal(){
+	var principalCount = parsePrincipalCount();
+	var totalStorage = parseTotalStorage();
+	var average = (totalStorage/principalCount).toFixed(2);
+	document.getElementById("averageStoragePerPrincipal").innerHTML = average + " MB";
+}
+
+function setAveragePrincipalsPerTenant(){
+	var principalCount = parsePrincipalCount();
+	var tenantCount = parseTenantCount();
+	var average = Math.floor(principalCount/tenantCount);
+	document.getElementById("averagePrincipalsPerTenant").innerHTML = average + " Users";
 }

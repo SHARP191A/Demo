@@ -1,5 +1,5 @@
 //generated list of n number of JSON objects
-var generatedJSON = generateJSON(1000);
+var generatedJSON = generateJSON(100000);
 
 function parseGeneratedJSON(column){
   var resultJSON = [];
@@ -21,7 +21,7 @@ function parseGeneratedJSON(column){
         map.set(key, map.get(key));
     resultJSON.push({country:key, litres:map.get(key)});
   }
-  console.log(JSON.stringify(resultJSON));
+//  console.log(JSON.stringify(resultJSON));
   return resultJSON;
 }
 
@@ -74,10 +74,9 @@ function parseDateOfGeneratedJSON(eventIdFilter,userTypeFilter){
   resultJSON.sort(function(a,b) {
     return new Date(a.date).getTime() - new Date(b.date).getTime();
   });
-  console.log(JSON.stringify(resultJSON));
+//  console.log(JSON.stringify(resultJSON));
   return resultJSON;
 }
-
 
 // parse time function still using static data.
 function parseTimeJSON(){
@@ -113,4 +112,50 @@ function parseTimeJSON(){
   });
   console.log(JSON.stringify(resultJSON));
   return resultJSON;
+}
+
+//return count of Principals
+function parsePrincipalCount(){
+	var principalArray = [];
+	for (var i=0; i < generatedJSON.length; i++){
+		var principalId = generatedJSON[i]["principalName"];
+		if(principalArray.indexOf(principalId) == -1){
+			principalArray.push(principalId);
+		}
+	}
+	console.log("Total Principals: " + principalArray.length);
+	return principalArray.length;
+}
+
+//return total amount of storage used 
+function parseTotalStorage(){
+	var totalStorage = 0;
+	var docMap = new Map();
+	for(var i=0; i < generatedJSON.length; i++){
+		var docId = generatedJSON[i]["docUUID"];
+		var currentDocSize = generatedJSON[i]["docSize"];
+		if(docMap.has(docId)){
+			totalStorage = totalStorage - docMap.get(docId) + currentDocSize;
+			docMap.set(docId,currentDocSize);
+		}
+		else{
+			totalStorage = totalStorage + currentDocSize;
+			docMap.set(docId,currentDocSize);
+		}
+	}
+	console.log("Total Storage: " + totalStorage);
+	return totalStorage;
+}
+
+//return count of Tenants
+function parseTenantCount(){
+	var tenantsArray = [];
+	for (var i=0; i < generatedJSON.length; i++){
+		var tenantId = generatedJSON[i]["extended"]["tenantId"];
+		if(tenantsArray.indexOf(tenantId) == -1){
+			tenantsArray.push(tenantId);
+		}
+	}
+	console.log("Total Tenants: " + tenantsArray.length)
+	return tenantsArray.length;
 }

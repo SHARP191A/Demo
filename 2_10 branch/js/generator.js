@@ -39,14 +39,14 @@ function getRandomValues(field){
     return getRandomItem(docLifeCycle_categories,weight);
   }
   else if (field == "docUUID"){
-    var docUUID_categories = ["fkfc2wmg", "lshn3x2k", "q9onu5ma", "tam7ht9d","pmq3t6zi", "alv1zice", "ou9vmxfe"];
-    var weight = [.45, .04, .28, .03, .05, .05, .10];
-    return getRandomItem(docLifeCycle_categories,weight);
+	  //1500 Documents
+    return Math.floor(rand(80000,81500));
   }
   else if (field == "tenantId"){
-    var tenantId_categories = ["yzt7u9yb", "t8n1weqv", "bmzesczr", "po4rjrof"];
-    var weight = [.65, .04, .28, .03];
-    return getRandomItem(docLifeCycle_categories,weight);
+	  //5 tenants
+    var tenantId_categories = ["United Postal Service", "FedEx", "Irvine Company", "Intel", "UCI ICS"];
+    var weight = [.2, .2, .2, .2, .2];
+    return getRandomItem(tenantId_categories,weight);
   }
   else if (field == "userType"){
     var userType_categories = ["Admin", "General","Guest", "Miscellaneous"];
@@ -58,6 +58,16 @@ function getRandomValues(field){
     var weight = [.18, .20, .42, .09, .1];
     return getRandomItem(sourceDevice_categories, weight);
   }
+  else if(field == "id"){
+	  return Math.floor(rand(10000,99999));
+  }
+  else if(field == "principalName"){
+	  //5000 Principals
+	  return Math.floor(rand(75000,80000));
+  }
+  else if(field == "docSize"){
+	  return rand(0.3,8.1);
+  }
 }
 
 //generate a list of x number of JSON objects, each represent 1 log entry
@@ -68,22 +78,23 @@ function generateJSON(numberOfLogs){
     var logEntry =  {
           "entity-type": "logEntry",
           "category": "eventDocumentCategory",
-          "principalName": "9",
+          "principalName": getRandomValues("principalName"),
           "comment": "Document does not exist anymore!",
           "docLifeCycle": getRandomValues("docLifeCycle"),
           "docPath": "/16a22186-f547-44f5-813d-2c9fd69368fe/UserWorkspaces/9/Copy of v1demos.xls._1452712490363_.trashed",
           "docType": getRandomValues("docType"),
-          "docUUID": "bca746c7-b946-497d-be29-5be2c547b739",
+          "docUUID": getRandomValues("docUUID"),
           "eventId": getRandomValues("eventId"),
           "repositoryId": "default",
           "eventDate": randDate,
+          "docSize": getRandomValues("docSize"),
           //new category source device
           "sourceDevice" : getRandomValues("sourceDevice"),
           "userType" : getRandomValues("userType"),
-          "id": 1353433,
+          "id": getRandomValues("id"),
           "logDate": randDate,
           "extended": {
-            "tenantId": "16a22186-f547-44f5-813d-2c9fd69368fe",
+            "tenantId": getRandomValues("tenantId"),
             "name": "Copy of v1demos.xls._1452712490363_.trashed",
             "parentPath": "/16a22186-f547-44f5-813d-2c9fd69368fe/UserWorkspaces/9"}
     }
