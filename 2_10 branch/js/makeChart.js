@@ -1,8 +1,8 @@
-  var pieChart;
-  var dateChart;
-  var barChart;
+var pieChart;
+var dateChart;
+var barChart;
 
-  function makePieChart(selectedDiv, labelsFlag, column){
+function makePieChart(selectedDiv, labelsFlag, column){
     pieChart = AmCharts.makeChart(selectedDiv, {
       "type": "pie",
       "labelsEnabled": labelsFlag,
@@ -56,23 +56,163 @@
   pieChart.addListener("rollOverSlice", function(e) {
     handleRollOver(e);
   });
+  pieChart.addListener("clickSlice", function(e){
+	  console.log(column);
+	  console.log(e.dataItem.dataContext.country);
+	  var dataSubset = filterLogs(generatedJSON, column, e.dataItem.dataContext.country);
+	  dateChart.dataProvider = dataSubset;
+	  console.log("Changing dataprovider for dateChart")
+  });
 }
 
-  function handleInit(){
+function makePieChartAndTimeline(selectedDiv1, labelsFlag, column, selectedDiv2, docLifeCycle, userType){	
+    pieChart = AmCharts.makeChart(selectedDiv1, {
+        "type": "pie",
+        "labelsEnabled": labelsFlag,
+        "autoMargins":false,
+        "marginTop": 0,
+        "marginBottom": 0,
+        "marginLeft": 0,
+        "marginRight": 0,
+        "pullOutRadius":15,
+        "startDuration": 0,
+        "theme": "light",
+        "addClassNames": true,
+        "legend":{
+         	"position":"right",
+          "marginRight":100,
+          "autoMargins":false
+        },
+        "innerRadius": "30%",
+        "defs": {
+          "filter": [{
+            "id": "shadow",
+            "width": "200%",
+            "height": "200%",
+            "feOffset": {
+              "result": "offOut",
+              "in": "SourceAlpha",
+              "dx": 0,
+              "dy": 0
+            },
+            "feGaussianBlur": {
+              "result": "blurOut",
+              "in": "offOut",
+              "stdDeviation": 5
+            },
+            "feBlend": {
+              "in": "SourceGraphic",
+              "in2": "blurOut",
+              "mode": "normal"
+            }
+          }]
+        },
+        "dataProvider": parseGeneratedJSON(column),
+        "valueField": "litres",
+        "titleField": "country",
+        "export": {
+          "enabled": true
+        }
+      });
+
+    pieChart.addListener("init", handleInit);
+    pieChart.addListener("rollOverSlice", function(e) {
+      handleRollOver(e);
+    });
+    pieChart.addListener("pullOutSlice", function(e){
+  	  var dataSubset = parseDateOfGeneratedJSON2("All","All",filterLogs(generatedJSON, column, e.dataItem.dataContext.country));
+  	  dateChart.dataProvider = dataSubset;
+  	  dateChart.validateData();
+  	  dateChart.animateAgain();
+    });
+    pieChart.addListener("pullInSlice", function(e){
+    	  dateChart.dataProvider = parseDateOfGeneratedJSON(docLifeCycle,userType);
+    	  dateChart.validateData();
+    	  dateChart.animateAgain();
+      });
+    
+    var dateChart = AmCharts.makeChart(selectedDiv2, {
+        "type": "serial",
+        "theme": "default",
+        "marginRight": 80,
+        "autoMarginOffset": 20,
+        "dataDateFormat": "YYYY-MM-DD",
+        "valueAxes": [{
+            "id": "v1",
+            "axisAlpha": 0,
+            "position": "left"
+        }],
+        "balloon": {
+            "borderThickness": 1,
+            "shadowAlpha": 0
+        },
+        "graphs": [{
+            "id": "g1",
+            "bullet": "round",
+            "bulletBorderAlpha": 1,
+            "bulletColor": "#FFFFFF",
+            "bulletSize": 5,
+            "hideBulletsCount": 50,
+            "lineThickness": 2,
+            "title": "red line",
+            "useLineColorForBulletBorder": true,
+            "valueField": "value",
+            "balloonText": "<div style='margin:5px; font-size:11px;'><span style='font-size:12px;'>[[category]]</span><span style='font-size:12px; font-weight:bold'><br> Events Logged: [[value]] <br></span> <span style='font-size:9px;'> Phone: [[Phone]]<br> Tablet: [[Tablet]]<br> Laptop: [[Laptop]]<br> Printer: [[Printer]]<br> IWB: [[IWB]]</span></div>"
+        }],
+        "chartScrollbar": {
+            "graph": "g1",
+            "oppositeAxis":false,
+            "offset":30,
+            "scrollbarHeight": 80,
+            "backgroundAlpha": 0,
+            "selectedBackgroundAlpha": 0.1,
+            "selectedBackgroundColor": "#888888",
+            "graphFillAlpha": 0,
+            "graphLineAlpha": 0.5,
+            "selectedGraphFillAlpha": 0,
+            "selectedGraphLineAlpha": 1,
+            "autoGridCount":true,
+            "color":"#AAAAAA"
+        },
+        "chartCursor": {
+            "pan": true,
+            "valueLineEnabled": true,
+            "valueLineBalloonEnabled": true,
+            "cursorAlpha":0,
+            "valueLineAlpha":0.2
+        },
+        "categoryField": "date",
+        "categoryAxis": {
+            "parseDates": true,
+            "dashLength": 1,
+            "minorGridEnabled": true
+        },
+        "export": {
+            "enabled": true
+        },
+        "dataProvider":   parseDateOfGeneratedJSON(docLifeCycle,userType)
+      	});
+    console.log("Initial Data:");
+    console.log(parseDateOfGeneratedJSON(docLifeCycle,userType));
+      dateChart.addListener("rendered", zoomChart);
+      dateChart.zoomToIndexes(dateChart.dataProvider.length - 40, dateChart.dataProvider.length - 1);
+}
+
+function handleInit(){
     pieChart.legend.addListener("rollOverItem", handleRollOver);
   }
 
-  function handleRollOver(e){
+function handleRollOver(e){
     var wedge = e.dataItem.wedge.node;
     wedge.parentNode.appendChild(wedge);
-  }
+}
 
-  function zoomChart() {
+function zoomChart() {
 
-  }
-
+}
 
 function makeTimeline(selectedDiv,docLifeCycle,userType){
+	console.log("Making Timeline");
   var dateChart = AmCharts.makeChart(selectedDiv, {
     "type": "serial",
     "theme": "default",
@@ -133,18 +273,14 @@ function makeTimeline(selectedDiv,docLifeCycle,userType){
         "enabled": true
     },
     "dataProvider":   parseDateOfGeneratedJSON(docLifeCycle,userType)
-});
-
-dateChart.addListener("rendered", zoomChart);
-
+  	});
+  dateChart.addListener("rendered", zoomChart);
   dateChart.zoomToIndexes(dateChart.dataProvider.length - 40, dateChart.dataProvider.length - 1);
 }
 
-
 function makeTimeChart(){
-
-var timeChart = AmCharts.makeChart("chartdiv", {
-    "type": "serial",
+	var timeChart = AmCharts.makeChart("chartdiv", {
+		"type": "serial",
     "theme": "light",
     "marginRight": 80,
     "dataProvider":  parseTimeJSON(),
@@ -412,7 +548,6 @@ function makeGlobalTrendsMap2(){
   // write the map to container div
   map.write("chartdiv");
 }
-
 
 var map;
 

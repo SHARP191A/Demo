@@ -3,6 +3,7 @@ $( document ).ready(function() {
    makeTimeline('chartdiv','All','All');
 });
 </script>
+
 <div id = "chartRegion">
     <div class = "timelineDropdown">
       <label class = "label">Event Type: </label>
@@ -17,7 +18,6 @@ $( document ).ready(function() {
         <option value="documentDuplicated">Document Duplicated</option>
         <option value="linkSent">Link Shared</option>
       </select>
-
       <label class = "label">User Type: </label>
       <select id = "userTypeOptions" class="form-control select">
         <option value="All">All</option>
@@ -27,7 +27,7 @@ $( document ).ready(function() {
         <option value="Miscellaneous">Miscellaneous</option>
       </select>
       <button id = "create" class="btn btn-default" onclick="createTimeline()">Apply</button>
-
     </div>
-      <div id="chartdiv"> </div>
+	<div id="chartdiv">
+	</div>
 </div>

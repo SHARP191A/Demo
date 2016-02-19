@@ -1,12 +1,14 @@
 var currentPage = "";
+var dateChart;
+var pieChart;
+var barChart;
 
+//function to mimic sync to database
 function randomizeData(){
-  //function to mimic sync to database
   generatedJSON = generateJSON(1000);
   console.log("randomize data");
   changePage(currentPage);
 }
-
 
 function changePage(pathToFile){
   console.log("changing page to " + pathToFile);
@@ -25,6 +27,11 @@ function createHome(){
   setAverageStoragePerPrincipal();
   setAveragePrincipalsPerTenant();
   
+}
+
+function createTest(){
+    makePieChart("chartSpace1", true, "docLifeCycle");
+    makeTimeline("chartSpace2", "All", "All");
 }
 
 function createPieChart(){

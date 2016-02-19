@@ -1,5 +1,5 @@
 //generated list of n number of JSON objects
-var generatedJSON = generateJSON(100000);
+var generatedJSON = generateJSON(10000);
 
 function parseGeneratedJSON(column){
   var resultJSON = [];
@@ -76,6 +76,59 @@ function parseDateOfGeneratedJSON(eventIdFilter,userTypeFilter){
   });
 //  console.log(JSON.stringify(resultJSON));
   return resultJSON;
+}
+
+function parseDateOfGeneratedJSON2(eventIdFilter,userTypeFilter,dataSubset){
+	  column = "eventDate";
+	  var resultJSON = [];
+	  var dateMap = new Map();
+	  var deviceMap = new Map();
+	  var rowLength = dataSubset.length;
+
+	  //fill in map
+	  for(var i = 0; i < rowLength; i++){
+	    var userType = dataSubset[i]["userType"];
+	    var eventId = dataSubset[i]["eventId"];
+	    if (eventId == eventIdFilter || eventIdFilter == "All"){
+	      if (userType == userTypeFilter || userTypeFilter == "All"){
+	        var day = dataSubset[i][column].getDay() + 1;
+	        var month = dataSubset[i][column].getMonth() + 1;
+	        if (day < 10){day = "0" + day;}
+	        if (month < 10){ month = "0" + month;}
+	        var key = dataSubset[i][column].getFullYear() + "-" + day + "-" + month;
+	        var sourceDevice = dataSubset[i]["sourceDevice"];
+
+	        if(dateMap.has(key)){
+	          dateMap.set(key, dateMap.get(key)+1);
+	        }
+	        else{
+	          dateMap.set(key, 1);
+	        }
+	          if(deviceMap.has(key)){
+	            if(sourceDevice == "Phone") deviceMap.set(key, {Phone:deviceMap.get(key).Phone + 1, Tablet:deviceMap.get(key).Tablet, Laptop:deviceMap.get(key).Laptop, Printer:deviceMap.get(key).Printer, IWB:deviceMap.get(key).IWB});
+	            else if(sourceDevice == "Tablet") deviceMap.set(key, {Phone:deviceMap.get(key).Phone, Tablet:deviceMap.get(key).Tablet + 1, Laptop:deviceMap.get(key).Laptop, Printer:deviceMap.get(key).Printer, IWB:deviceMap.get(key).IWB});
+	            else if(sourceDevice == "Laptop") deviceMap.set(key, {Phone:deviceMap.get(key).Phone, Tablet:deviceMap.get(key).Tablet, Laptop:deviceMap.get(key).Laptop + 1, Printer:deviceMap.get(key).Printer, IWB:deviceMap.get(key).IWB});
+	            else if(sourceDevice == "Printer") deviceMap.set(key, {Phone:deviceMap.get(key).Phone, Tablet:deviceMap.get(key).Tablet, Laptop:deviceMap.get(key).Laptop, Printer:deviceMap.get(key).Printer + 1, IWB:deviceMap.get(key).IWB});
+	            else if(sourceDevice == "IWB") deviceMap.set(key, {Phone:deviceMap.get(key).Phone, Tablet:deviceMap.get(key).Tablet, Laptop:deviceMap.get(key).Laptop, Printer:deviceMap.get(key).Printer, IWB:deviceMap.get(key).IWB + 1});
+	          }
+	          else{
+	            if(sourceDevice == "Phone") deviceMap.set(key, {Phone:1, Tablet:0, Laptop:0, Printer:0, IWB:0});
+	            else if(sourceDevice == "Tablet") deviceMap.set(key, {Phone:0, Tablet:1, Laptop:0, Printer:0, IWB:0});
+	            else if(sourceDevice == "Laptop") deviceMap.set(key, {Phone:0, Tablet:0, Laptop:1, Printer:0, IWB:0});
+	            else if(sourceDevice == "Printer") deviceMap.set(key, {Phone:0, Tablet:0, Laptop:0, Printer:1, IWB:0});
+	            else if(sourceDevice == "IWB") deviceMap.set(key, {Phone:0, Tablet:0, Laptop:0, Printer:0, IWB:1});
+	          }
+	      }
+	    }
+	  }
+	  for (var key of dateMap.keys()) {
+	        resultJSON.push({date:key, value:dateMap.get(key), Phone:deviceMap.get(key).Phone, Tablet:deviceMap.get(key).Tablet, Laptop:deviceMap.get(key).Laptop, Printer:deviceMap.get(key).Printer, IWB:deviceMap.get(key).IWB});
+	  }
+	  resultJSON.sort(function(a,b) {
+	    return new Date(a.date).getTime() - new Date(b.date).getTime();
+	  });
+	//  console.log(JSON.stringify(resultJSON));
+	  return resultJSON;
 }
 
 // parse time function still using static data.
@@ -158,4 +211,18 @@ function parseTenantCount(){
 	}
 	console.log("Total Tenants: " + tenantsArray.length)
 	return tenantsArray.length;
+}
+
+
+//return all logs in specified dataset E where criteria is met
+function filterLogs(dataset,category, value){
+	var result = [];
+	console.log(dataset);
+	for (var i of dataset){
+		if(i[category] == value){
+			result.push(i)
+		}
+	}
+	console.log(result);
+	return result;
 }
