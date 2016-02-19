@@ -1,0 +1,33 @@
+<script>
+  $(document).ready(function() {
+    makeTimeline('chartdiv', 'All', 'All');
+  });
+</script>
+<div id="chartRegion">
+  <div class="timelineDropdown">
+    <label class="label">Event Type: </label>
+    <select id="eventIdOptions" class="form-control select">
+      <option value="All">All</option>
+      <option value="securityUpdated">Information Updated</option>
+      <option value="linkExpired">Link Expired</option>
+      <option value="lifecycle_transition_event">Lifecycle Transition Event</option>
+      <option value="documentCreated">Document Created</option>
+      <option value="documentMoved">Document Moved</option>
+      <option value="deleted">Document Deleted</option>
+      <option value="documentDuplicated">Document Duplicated</option>
+      <option value="linkSent">Link Shared</option>
+    </select>
+
+    <label class="label">User Type: </label>
+    <select id="userTypeOptions" class="form-control select">
+      <option value="All">All</option>
+      <option value="Admin">Admin</option>
+      <option value="General">General</option>
+      <option value="Guest">Guest</option>
+      <option value="Miscellaneous">Miscellaneous</option>
+    </select>
+    <button id="create" class="btn btn-default" onclick="createTimeline()">Apply</button>
+
+  </div>
+  <div id="chartdiv"> </div>
+</div>

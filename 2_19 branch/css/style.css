@@ -61,44 +61,24 @@ div#chartRegion{
 
 div.dropdown{
   margin:auto;
-	padding-top: 3px;
-	padding-bottom: 5px;
-	width:45%;
+  padding: 10px;
 }
 
-
-.dropdown-menu .sub-menu {
-    left: 100%;
-    position: absolute;
-    top: 0;
-    visibility: hidden;
-    margin-top: -1px;
+.select{
+  width: 200px;
+  float:left;
+  margin: 0px 10px 0px 10px;
 }
 
-.dropdown-menu li:hover .sub-menu {
-    visibility: visible;
+#create{
+  width: 100px;
+  float:left;
 }
 
-.dropdown:hover .dropdown-menu {
-    display: block;
-}
-
-#icon{
-	 width: 240px;
-	 padding-left:35px;
-	 margin-bottom: 20px;
-	 border-radius: 5px;
-}
-
-h2{
-	padding-left:30px;
-}
-h4{
-	padding-left:30px;
-}
-
-html{
-	height:100%;
+.label{
+  color: black;
+  float:left;
+  padding-top: 10px;
 }
 
 body{
@@ -131,7 +111,7 @@ body{
 }
 
 .leftSideColumnTextBox{
-	height:25%;
+	height:33%;
 	background-color:white;
 	border-radius:15px;
 	text-align:center;
@@ -139,7 +119,7 @@ body{
 }
 
 .rightSideColumnTextBox{
-	height:33%;
+	height:50%;
 	background-color:white;
 	border-radius:15px;
 	text-align:center;
