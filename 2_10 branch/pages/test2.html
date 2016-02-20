@@ -1,35 +1,52 @@
 <script>
 $( document ).ready(function() {
-//     createTest();
-	makePieChartAndTimeline("chartSpace1", "false", "userType", "chartSpace2", "All", "All");
+	prepareTest2Page();
 });
 </script>
 
-	<div class="row" id="pageContent">
-		<div class="col-xs-2 sideColumn" id="leftColumn">
-			<div class="leftSideColumnTextBox row">
-				Average Storage per Principal: 
-				<div id="averageStoragePerPrincipal"></div>
-			</div>
-			<div class="leftSideColumnTextBox row">
-				Average Number of Principals Per Tenant:
-				<div id="averagePrincipalsPerTenant"></div>
-			</div>
-			<div class="leftSideColumnTextBox row">Text3</div>
+<div class="row" id="pageContent">
+	<div class="col-xs-2 sideColumn" id="leftColumn">
+		<div class="leftSideColumnTextBox row">
+			Average Storage per Principal: 
+			<div id="averageStoragePerPrincipal"></div>
 		</div>
-		<div class="col-xs-8 chartsColumn">
-			<div class="row chartSpaceRow" >
-				<div class="col-xs-12 chartSpace" id="chartSpace1"> Chart 1
-				</div>
-			</div>
-			<div class="row chartSpaceRow">
-				<div class="col-xs-12 chartSpace" id="chartSpace2"> Chart 2
-			</div>
+		<div class="leftSideColumnTextBox row">
+			Average Number of Principals Per Tenant:
+			<div id="averagePrincipalsPerTenant"></div>
+		</div>
+		<div class="leftSideColumnTextBox row">Text3</div>
+	</div>
+	<div class="col-xs-8 chartsColumn">
+		<div class="row chartSpaceRow" >
+			<div class="col-xs-12 chartSpace" id="chartSpace1"> Chart 1
+				<div class="row pieDropdown">
+	   				<label class = "label">Data: </label>
+	      			<select id = "pieOptions" class="form-control select">
+						<option value="docLifeCycle">Document Life Cycle</option>
+      					<option value="docType">Document Type</option>
+      					<option value="userType">User Type</option>
+      					<option value="eventId">Event Logged Type</option>
+	      			</select>
+					<label class = "label">Timeframe: </label>
+			      	<select id = "dateFilterOptions" class="form-control select">
+			        	<option value="total">All</option>
+			        	<option value="7">Past Week</option>
+			        	<option value="30">Past Month</option>
+			        	<option value="365">Past Year</option>			        	
+			      	</select>
+			      	<button id = "create" class="btn btn-default" onclick="applyPieOptions()">Apply</button>
+	   			</div>
+				<div class="row chartWithDropDown" id="chartdiv1"></div>
 			</div>
 		</div>
-		<div class="col-xs-2 sideColumn" id="rightColumn">
-			<div class="rightSideColumnTextBox row" id = "right1">Text1</div>
-			<div class="rightSideColumnTextBox row" id = "right2">Text2</div>
-			<div class="rightSideColumnTextBox row" id = "right3">Text3</div>
+		<div class="row chartSpaceRow">
+			<div class="col-xs-12 chartSpace" id="chartSpace2"> Chart 2
+		</div>
 		</div>
 	</div>
+	<div class="col-xs-2 sideColumn" id="rightColumn">
+		<div class="rightSideColumnTextBox row" id = "right1">Text1</div>
+		<div class="rightSideColumnTextBox row" id = "right2">Text2</div>
+		<div class="rightSideColumnTextBox row" id = "right3">Text3</div>
+	</div>
+</div>
