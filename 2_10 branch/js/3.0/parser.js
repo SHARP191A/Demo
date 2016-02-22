@@ -212,10 +212,11 @@ function parseFileTypeStorage(dataset){
 }
 
 function dateFilter(dataset,dateFilter){
+	console.log("Datefilter: " + dateFilter);
 	var resultJSON = [];
 	var check = new Date().getTime() - (dateFilter*24*60*60*1000);
 	for(var i of dataset){
-		if(i["logDate"] > check || check=="total"){
+		if(i["logDate"] > check || dateFilter=="total"){
 			resultJSON.push(i);
 		}
 	}

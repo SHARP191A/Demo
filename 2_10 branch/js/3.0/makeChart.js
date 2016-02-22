@@ -20,6 +20,9 @@ function makePieChart(dataset, column){
 
 function makeTimeline(dataset){
 	var timeline = new AmCharts.AmSerialChart();
+	timeline.balloon = {
+			"enabled": true
+	}
 	timeline.graphs = [
 	                   {	  
 	                	"balloonText": "<div style='margin:5px; font-size:11px;'><span style='font-size:12px;'>[[category]]</span><span style='font-size:12px; font-weight:bold'><br> Events Logged: [[value]] <br></span> <span style='font-size:9px;'> Phone: [[Phone]]<br> Tablet: [[Tablet]]<br> Laptop: [[Laptop]]<br> Printer: [[Printer]]<br> IWB: [[IWB]]</span></div>",
@@ -27,7 +30,7 @@ function makeTimeline(dataset){
 	                	"bulletBorderAlpha": 1,
 	                    "bulletColor": "#FFFFFF",
 	                    "bulletSize": 5,
-	                    "hideBulletsCount": 50,
+	                    "hideBulletsCount": 0,
 	                    "id":"g1",
 	                    "lineThickness": 2,
 	                    "title": "red line",
@@ -113,4 +116,32 @@ function adjustPieChartToSmall(pieChart){
 	pieChart.marginLeft = 0;
 	pieChart.marginRight = 0;
 	pieChart.pullOutRadius = 0;
+}
+
+function linkBarChartAndTimeline(mainChart, slaveChart, masterColumn, slaveColumn){
+	slaveChart.zoomed = false;
+	mainChart.addListener("clickGraphItem", function(e){
+		if(slaveChart.zoomed == false){
+			var value = e.item.dataContext[masterColumn];
+			var filteredLogs = filterLogs(generatedJSON, masterColumn, value);
+			var dataSubset = parseDateOfData(filteredLogs,"All", "All");
+			
+			slaveChart.zoomed = true;
+			slaveChart.previousClicked = e.item.dataContext[masterColumn];
+			
+			slaveChart.dataProvider = dataSubset;
+			slaveChart.validateData();
+			slaveChart.animateAgain();
+		}
+		else{
+			var currentClicked = e.item.dataContext[masterColumn];
+			if(currentClicked == slaveChart.previousClicked){
+				slaveChart.dataProvider = parseDateOfData(generatedJSON, "All", "All");
+				slaveChart.validateData();
+				slaveChart.animateAgain();
+				slaveChart.zoomed = false;
+			}
+		}
+
+	});
 }

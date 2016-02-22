@@ -1,5 +1,5 @@
 //generated list of n number of JSON objects
-var generatedJSON = generateJSON(100000);
+var generatedJSON = generateJSON(1000);
 
 //helper functions to randomly choose an item from a list with the given weights
 function randomDate(start, end) {

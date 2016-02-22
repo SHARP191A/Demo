@@ -3,6 +3,9 @@ function createHome(){
 	var homeBarChart = makeBarChart(barChartData, "docLifeCycle");
 	var timelineData = parseDateOfData(generatedJSON, "All", "All");
 	var homeTimeline = makeTimeline(timelineData);
+	
+	linkBarChartAndTimeline(homeBarChart,homeTimeline,"docLifeCycle");
+	
 	displayChart("chartSpace1",homeBarChart);
 	displayChart("chartSpace2",homeTimeline);
 }
