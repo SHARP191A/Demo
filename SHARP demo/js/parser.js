@@ -211,6 +211,28 @@ function parseFileTypeStorage(dataset){
 	return resultJSON;
 }
 
+function parseLocationOfData(dataset){
+	var resultJSON = [];
+	var locationMap = new Map();
+
+	for(var i of dataset){
+		var location = i["location"];
+		if(locationMap.has(location)){
+			var currentCount = locationMap.get(location);
+			locationMap.set(location, currentCount+1);
+		}
+		else{
+			locationMap.set(location,1);
+		}
+	}
+
+	for(var key of tenantMap.keys()){
+		resultJSON.push({state: key, value: locationMap.get(key)});
+	}
+	return resultJSON;
+
+}
+
 function dateFilter(dataset,dateFilter){
 	var resultJSON = [];
 	var check = new Date().getTime() - (dateFilter*24*60*60*1000);

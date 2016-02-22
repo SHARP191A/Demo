@@ -22,6 +22,8 @@ function prepareHomePage(){
 	var timelineData = parseDateOfData(generatedJSON, "All", "All");
 	var homeTimeline = makeTimeline(timelineData);
 
+  linkBarChartAndTimeline(homeBarChart,homeTimeline,"docLifeCycle");
+
 	var pieChartData = parseData(generatedJSON,"userType");
 	var homePieChart = makePieChart(pieChartData,"userType");
 	adjustPieChartToSmall(homePieChart);

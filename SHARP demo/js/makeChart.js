@@ -108,6 +108,34 @@ function linkStoragePieCharts(mainChart, slaveChart, masterColumn, slaveColumn) 
   });
 }
 
+function linkBarChartAndTimeline(mainChart, slaveChart, masterColumn, slaveColumn){
+	slaveChart.zoomed = false;
+	mainChart.addListener("clickGraphItem", function(e){
+		if(slaveChart.zoomed == false){
+			var value = e.item.dataContext[masterColumn];
+			var filteredLogs = filterLogs(generatedJSON, masterColumn, value);
+			var dataSubset = parseDateOfData(filteredLogs,"All", "All");
+
+			slaveChart.zoomed = true;
+			slaveChart.previousClicked = e.item.dataContext[masterColumn];
+
+			slaveChart.dataProvider = dataSubset;
+			slaveChart.validateData();
+			slaveChart.animateAgain();
+		}
+		else{
+			var currentClicked = e.item.dataContext[masterColumn];
+			if(currentClicked == slaveChart.previousClicked){
+				slaveChart.dataProvider = parseDateOfData(generatedJSON, "All", "All");
+				slaveChart.validateData();
+				slaveChart.animateAgain();
+				slaveChart.zoomed = false;
+			}
+		}
+
+	});
+}
+
 function removeChartLegend(chart){
 	chart.legend["enabled"] = false;
 }
