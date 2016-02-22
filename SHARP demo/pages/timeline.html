@@ -1,0 +1,42 @@
+<script>
+	$(document).ready(function() {
+		prepareDocumentsPage();
+	});
+</script>
+
+<div class="row" id="pageContent">
+	<div class="col-xs-1 sideColumn" id="leftColumn">
+	</div>
+	<div class="col-xs-10 chartsColumn">
+		<div class="row chartSpaceRow">
+			<div class="col-xs-12 chartSpace">
+				<div class="row timelineDropdown">
+					<label class="dropdownLabel">Event Type: </label>
+					<select id="eventIdOptions" class="form-control select">
+						<option value="All">All</option>
+						<option value="securityUpdated">Information Updated</option>
+						<option value="linkExpired">Link Expired</option>
+						<option value="lifecycle_transition_event">Lifecycle Transition Event</option>
+						<option value="documentCreated">Document Created</option>
+						<option value="documentMoved">Document Moved</option>
+						<option value="deleted">Document Deleted</option>
+						<option value="documentDuplicated">Document Duplicated</option>
+						<option value="linkSent">Link Shared</option>
+					</select>
+					<label class="dropdownLabel">User Type: </label>
+					<select id="userTypeOptions" class="form-control select">
+						<option value="All">All</option>
+						<option value="Admin">Admin</option>
+						<option value="General">General</option>
+						<option value="Guest">Guest</option>
+						<option value="Miscellaneous">Miscellaneous</option>
+					</select>
+					<button id="create" class="btn btn-default" onclick="applyTimelineOptions()">Apply</button>
+				</div>
+				<div class="row chartWithDropDown" id="chartdiv1"></div>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-1 sideColumn" id="rightColumn">
+	</div>
+</div>

@@ -1,13 +1,16 @@
+//generated list of n number of JSON objects
+var generatedJSON = generateJSON(1000);
+
 //helper functions to randomly choose an item from a list with the given weights
 function randomDate(start, end) {
     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 }
 
-var rand = function(min, max) {
-    return Math.random() * (max - min) + min;
+function rand(min, max) {
+    return Math.random()*(max - min) + min;
 };
 
-var getRandomItem = function(list, weight) {
+function getRandomItem(list, weight) {
     var total_weight = weight.reduce(function (prev, cur, i, arr) {
         return prev + cur;
     });
@@ -22,14 +25,9 @@ var getRandomItem = function(list, weight) {
     }
 };
 
-function generateRandomNumber(min, max)
-{
-	return (Math.random()*max + min);
-};
-
 function getRandomValues(field){
   if(field == "docType"){
-    var docType_categories = ["File", "Drawings", "Workspace", "UserProfile", "Picture", "EmployeeRecord", "Contract", "Unit", "Folder", "BillOfLading"];
+    var docType_categories = ["Text File", "IWB image", "MP3", "User Profile", "Photos", "Employee Record", "Contract", "Unit", "Folder", "Bill of Lading"];
     var weight = [0.6, 0.01, 0.02, 0.10, 0.17, 0.02, 0.02, 0.03, 0.04, 0.01];
     return getRandomItem(docType_categories,weight);
   }
@@ -39,46 +37,49 @@ function getRandomValues(field){
     return getRandomItem(eventId_categories,weight);
   }
   else if (field == "docLifeCycle"){
-    var docLifeCycle_categories = ["project", "undefined", "deleted", "null"];
-    var weight = [.65, .04, .28, .03];
+    var docLifeCycle_categories = ["Recently Created", "Active", "Stale", "Recently Deleted"];
+    var weight = [.19, .40, .22,.19];
     return getRandomItem(docLifeCycle_categories,weight);
   }
-    else if (field == "docUUID"){
-    var docUUID_categories = ["fkfc2wmg", "lshn3x2k", "q9onu5ma", "tam7ht9d","pmq3t6zi", "alv1zice", "ou9vmxfe"];
-    var weight = [.45, .04, .28, .03, .05, .05, .10];
-    return getRandomItem(docLifeCycle_categories,weight);
+  else if (field == "docUUID"){
+	  //1500 Documents
+    return Math.floor(rand(80000,81500));
   }
-    else if (field == "principalName"){
-    return generateRandomNumber(1000,9999);
+  else if (field == "tenantId"){
+	  //5 tenants
+    var tenantId_categories = ["United Postal Service", "FedEx", "Irvine Company", "Intel", "UCI ICS"];
+    var weight = [.2, .1, .4, .25, .05];
+    return getRandomItem(tenantId_categories,weight);
   }
-    else if (field == "entity-type"){
-    var entity-type_categories = ["project", "undefined", "deleted", "null"];
-    var weight = [.65, .04, .28, .03];
-    return getRandomItem(docLifeCycle_categories,weight);
+  else if (field == "userType"){
+    var userType_categories = ["Admin", "General","Guest", "Miscellaneous"];
+    var weight = [.12, .70, .16, .02];
+    return getRandomItem(userType_categories,weight);
   }
-    else if (field == "tenantId"){
-    var tenantId_categories = ["UC Irvine", "United Postal Service", "SHARP Labs", "LinkedIn", "Comcast", "Irvine Company",
-	"Cisco", "Blizzard", "MSC Software", "Tallan"];
-    var weight = [.1, .1, .1, .1, .1, .1, .1, .1, .1, .1];
-    return getRandomItem(docLifeCycle_categories,weight);
+  else if (field == "sourceDevice"){
+    var sourceDevice_categories = ["Phone", "Tablet","Laptop", "Printer", "IWB"];
+    var weight = [.18, .20, .42, .09, .1];
+    return getRandomItem(sourceDevice_categories, weight);
   }
-    else if (field == "device-Type"){
-    var device-Type_categories = ["Desktop/Laptop", "Phone", "Tablet", "Smart-Whiteboard"];
-    var weight = [.45, 0.15, 0.25, 0.05];
-    return getRandomItem(eventId_categories,weight);
+  else if(field == "id"){
+	  return Math.floor(rand(10000,99999));
+  }
+  else if(field == "principalName"){
+	  //5000 Principals
+	  return Math.floor(rand(75000,80000));
+  }
+  else if(field == "docSize"){
+	  return rand(0.3,8.1)
   }
 }
-
-
-
 
 //generate a list of x number of JSON objects, each represent 1 log entry
 function generateJSON(numberOfLogs){
   var generatedJSON = [];
-  for (i = 0; i < numberOfLogs; i++){
+  for (var i = 0; i < numberOfLogs; i++){
     var randDate = randomDate(new Date(2015, 6, 2), new Date());
     var logEntry =  {
-          "entity-type": getRandomValues("logEntry"),
+          "entity-type": "logEntry",
           "category": "eventDocumentCategory",
           "principalName": getRandomValues("principalName"),
           "comment": "Document does not exist anymore!",
@@ -89,9 +90,11 @@ function generateJSON(numberOfLogs){
           "eventId": getRandomValues("eventId"),
           "repositoryId": "default",
           "eventDate": randDate,
+          "docSize": getRandomValues("docSize"),
           //new category source device
           "sourceDevice" : getRandomValues("sourceDevice"),
-          "id": 1353433,
+          "userType" : getRandomValues("userType"),
+          "id": getRandomValues("id"),
           "logDate": randDate,
           "extended": {
             "tenantId": getRandomValues("tenantId"),

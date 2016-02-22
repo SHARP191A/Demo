@@ -7,8 +7,10 @@ body{
 
 div#header{
 	margin:auto;
-	padding-bottom: 10px;
+	padding-top: 1%;
+	padding-bottom: 0.15%;
 	padding-left: 20px;
+	overflow: hidden;
 }
 
 h1#headerTitle{
@@ -39,11 +41,13 @@ nav#navBar{
 
 div#chartRegion{
 	width:85%;
+	height:100%;
 	margin:auto;
 	padding-top: 20px;
 	background-color: #D2D2D2;
 	border-radius: 10px;
 }
+
 
 #chartdiv {#chartdiv {
 	float : left;
@@ -58,16 +62,7 @@ div#chartRegion{
 }
 
 
-div.dropdown{
-	/*border-style: solid;
-	border-width: 2px 4px 2px 4px;
-	border-color: #8E0000;
-	border-radius: 7px;*/
-  margin:auto;
-	padding-top: 3px;
-	padding-bottom: 5px;
-	width:35%;
-}
+
 
 #icon{
 	 width: 240px;
@@ -81,4 +76,110 @@ h2{
 }
 h4{
 	padding-left:30px;
+}
+
+html{
+	height:100%;
+}
+
+body{
+	padding:0px;
+	width:100%;
+	height:100%;
+	margin: 0px;
+	background-color: #000016;
+}
+
+.pageContent{
+	border-radius:15px;
+}
+
+.row{
+	margin:0px;
+	margin-bottom:5px;
+	margin-top:5px;
+}
+
+#pageContent{
+	height:550px;
+}
+
+.sideColumn{
+	height: 100%;
+	overflow:visible;
+	border-radius:20px;
+/* 	display: table; */
+
+}
+
+.leftSideColumnTextBox{
+	height:33%;
+	background-color: white;
+	border-radius:15px;
+	text-align:center;
+/* 	display: table-cell; */
+/* 	vertical-align: middle; */
+
+}
+
+.rightSideColumnTextBox{
+	height:50%;
+	background-color:white;
+	border-radius:15px;
+	text-align:center;
+}
+
+.chartsColumn{
+	height:100%;
+}
+
+.chartSpaceRow{
+	height:50%;
+	background-color: #D2D2D2;
+	text-align:center;
+	border-radius:20px;
+}
+
+.chartSpace{
+	height:90%;
+	border-radius:10px;
+}
+
+.chartWithDropDown{
+	height:80%
+}
+
+img#sharpLogo{
+	max-width:100%;
+	max-height:100%;
+}
+
+label.sideBarLabel{
+	font-size: 12px;
+}
+
+img.sideBarIcon{
+	height:115px;
+	padding-top: 0px;
+}
+
+#navBar{
+	background-color: white;
+	border-radius:20px;
+
+}
+
+.navLink{
+	border: thin solid grey;
+	text-align: center;
+	border-radius:5px;
+}
+
+.homepageLabel{
+	color: black;
+	padding-top: 4px;
+}
+
+#chartdivTemplate{
+	height:100%;
 }
