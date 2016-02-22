@@ -140,6 +140,10 @@ function removeChartLegend(chart){
 	chart.legend["enabled"] = false;
 }
 
+function disableAnimation(chart){
+	chart.startDuration = .001;
+}
+
 function adjustPieChartToSmall(pieChart) {
   pieChart.labelsEnabled = false;
   pieChart.autoMargins = false;

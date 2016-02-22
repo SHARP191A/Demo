@@ -202,7 +202,7 @@ function parseFileTypeStorage(dataset){
 			fileTypeMap.set(fileType,newStorage);
 		}
 		else
-			fileTypeMap.set(fileType,docSize);
+			fileTypeMap.set(fileType,docSize.toFixed(2));
 	}
 
 	for(var key of fileTypeMap.keys()){

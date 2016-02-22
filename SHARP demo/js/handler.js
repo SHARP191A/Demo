@@ -47,6 +47,7 @@ function prepareStoragePage(){
 	var fileTypeData = parseFileTypeStorage(generatedJSON);
 	var fileTypeChart = makePieChart(fileTypeData,"category");
 //	adjustPieChartToSmall(usagePieChart);
+  disableAnimation(fileTypeChart);
 
 	linkStoragePieCharts(storagePieChart,fileTypeChart,"tenantId","docType");
 
