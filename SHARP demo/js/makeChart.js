@@ -165,8 +165,15 @@ function linkGeographicChartAndPieChart(mainChart,slaveChart, masterColumn, slav
 	mainChart.addListener("clickMapObject", function(e){
 		var id = e.mapObject.id;
 		var filteredLogs = filterLogs(generatedJSON, masterColumn, id);
-		var dataSubset = parseFileTypeStorage(filteredLogs)
+		var dataSubset = parseTenantCPOUsage(filteredLogs)
 		slaveChart.dataProvider = dataSubset;
+		
+		slaveChart.validateData();
+		slaveChart.animateAgain();
+	});
+	mainChart.addListener("homeButtonClicked",function(e){
+		console.log("clickedHomeButton");
+		slaveChart.dataProvider = parseTenantCPOUsage(generatedJSON);
 		
 		slaveChart.validateData();
 		slaveChart.animateAgain();

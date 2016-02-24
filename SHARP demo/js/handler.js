@@ -73,20 +73,20 @@ function prepareGeographicPage(){
 	var geographicDataset = parseLocationOfData(generatedJSON);
 	var geographicChart = makeGeographicChart(geographicDataset);
 	
-	var fileTypeData = parseFileTypeStorage(generatedJSON);
-	var fileTypeChart = makePieChart(fileTypeData,"category");
-//	moveChartLegendToBottom(fileTypeChart);
-	removeChartLegend(fileTypeChart);
-	adjustPieChartToSmall(fileTypeChart);
+	var tenantUsageData = parseTenantCPOUsage(generatedJSON);
+	var tenantUsageChart = makePieChart(tenantUsageData,"category");
+	moveChartLegendToBottom(tenantUsageChart);
+//	removeChartLegend(tenantUsageChart);
+	adjustPieChartToSmall(tenantUsageChart);
 //	
 	var barChartData = parseData(generatedJSON,"docLifeCycle");
 	var homeBarChart = makeBarChart(barChartData, "docLifeCycle");
 	
-	linkGeographicChartAndPieChart(geographicChart,fileTypeChart,"location","b");
+	linkGeographicChartAndPieChart(geographicChart,tenantUsageChart,"location","b");
 	
 
 	displayChart("mapDiv",geographicChart);
-	displayChart("pieDiv",fileTypeChart);
+	displayChart("pieDiv",tenantUsageChart);
 	displayChart("barDiv",homeBarChart);
 	
 }
