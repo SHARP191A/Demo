@@ -21,7 +21,7 @@ function parseData(dataset, column){
 		categoryObject["units"] = map.get(key);
 		resultJSON.push(categoryObject);
 	}
-	console.log(resultJSON);
+//	console.log(resultJSON);
 	return resultJSON;
 }
 
@@ -87,7 +87,7 @@ function parsePrincipalCount(dataset){
 			principalArray.push(principalId);
 		}
 	}
-	console.log("Total Principals: " + principalArray.length);
+//	console.log("Total Principals: " + principalArray.length);
 	return principalArray.length;
 }
 
@@ -107,7 +107,6 @@ function parseTotalStorage(dataset){
 			docMap.set(docId,currentDocSize);
 		}
 	}
-	console.log("Total Storage: " + totalStorage);
 	return totalStorage;
 }
 
@@ -126,7 +125,6 @@ function parseTenantCount(dataset){
 
 //return all logs in specified dataset where the value of CATEGORY == VALUE
 function filterLogs(dataset,category, value){
-	console.log(category, value);
 	var result = [];
 	if(category=="tenantId"){
 		for(var i of dataset){
@@ -142,7 +140,6 @@ function filterLogs(dataset,category, value){
 			}
 		}
 	}
-	console.log(result.length);
 	return result;
 }
 
@@ -225,9 +222,9 @@ function parseLocationOfData(dataset){
 			locationMap.set(location,1);
 		}
 	}
-
-	for(var key of tenantMap.keys()){
-		resultJSON.push({state: key, value: locationMap.get(key)});
+	for(var key of locationMap.keys()){
+		var item = {id: key, value: locationMap.get(key)};
+		resultJSON.push(item);
 	}
 	return resultJSON;
 

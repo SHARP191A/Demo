@@ -1,0 +1,25 @@
+.geographicChartSpace{
+	height: 100%;
+	border-radius:10px;
+	background-color: #D2D2D2;
+}
+
+#geographicPageChartRegion{
+	width:85%;
+	height:85%;
+	margin:auto;
+	padding-top: 20px;
+	border-radius: 10px;
+}
+
+.geographicColumn{
+	height:100%
+}
+
+.geographicRightColumnBox{
+	height:50%;
+}
+
+.geographicRightColumnChart{
+	height:100%;
+}

@@ -1,6 +1,4 @@
 function displayChart(selectedDiv, chart) {
-  console.log("Displaying Chart");
-  console.log(chart.dataProvider);
   chart.write(selectedDiv);
 }
 
@@ -17,7 +15,6 @@ function makePieChart(dataset, column) {
   pieChart.pullOutOnlyOne = true;
   return pieChart;
 }
-
 
 function makeTimeline(dataset) {
   var timeline = new AmCharts.AmSerialChart();
@@ -91,6 +88,26 @@ function makeBarChart(dataset, column) {
   return barChart;
 }
 
+
+function makeGeographicChart(dataset){
+	var geographicChart = new AmCharts.AmMap();
+	geographicChart.type = "map";
+	geographicChart.dataProvider = {
+			map: "usaLow",
+			areas: dataset
+	}
+	geographicChart.areasSettings = {
+		    autoZoom: true
+		  };
+	geographicChart.valueLegend = {
+		    right: 10,
+		    minValue: "little",
+		    maxValue: "a lot!"
+		  };
+
+	return geographicChart;
+}
+
 function linkStoragePieCharts(mainChart, slaveChart, masterColumn, slaveColumn) {
   mainChart.addListener("pullOutSlice", function(e) {
     var filteredLogs = filterLogs(generatedJSON, masterColumn, e.dataItem.dataContext.category);
@@ -102,7 +119,7 @@ function linkStoragePieCharts(mainChart, slaveChart, masterColumn, slaveColumn) 
   })
 
   mainChart.addListener("pullInSlice", function(e) {
-    slaveChart.dataProvider = parseFileTypeStorage(generatedJSON, slaveColumn);
+    slaveChart.dataProvider = parseFileTypeStorage(generatedJSON);
     slaveChart.validateData();
     slaveChart.animateAgain();
   });
@@ -131,9 +148,29 @@ function linkBarChartAndTimeline(mainChart, slaveChart, masterColumn, slaveColum
 				slaveChart.animateAgain();
 				slaveChart.zoomed = false;
 			}
+			else{
+				var filteredLogs = filterLogs(generatedJSON,masterColumn,currentClicked);
+				var newSubset = parseDateOfData(filteredLogs,"All","All");
+				
+				slaveChart.dataProvider = newSubset;
+				slaveChart.validateData();
+				slaveChart.animateAgain();
+			}
 		}
 
 	});
+}
+
+function linkGeographicChartAndPieChart(mainChart,slaveChart, masterColumn, slaveColumn){
+	mainChart.addListener("clickMapObject", function(e){
+		var id = e.mapObject.id;
+		var filteredLogs = filterLogs(generatedJSON, masterColumn, id);
+		var dataSubset = parseFileTypeStorage(filteredLogs)
+		slaveChart.dataProvider = dataSubset;
+		
+		slaveChart.validateData();
+		slaveChart.animateAgain();
+	})
 }
 
 function removeChartLegend(chart){
@@ -152,4 +189,8 @@ function adjustPieChartToSmall(pieChart) {
   pieChart.marginLeft = 7;
   pieChart.marginRight = 7;
   pieChart.pullOutRadius = 0;
+}
+
+function moveChartLegendToBottom(chart){
+	chart["legend"]["position"] = "bottom";
 }

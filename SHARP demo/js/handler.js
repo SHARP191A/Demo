@@ -1,12 +1,11 @@
 var currentPage = "";
 
-function randomizeData() {
-  //function to mimic sync to database
+//function to mimic sync to database
+function randomizeData() {  
   generatedJSON = generateJSON(1000);
   console.log("randomize data");
   changePage(currentPage);
 }
-
 
 function changePage(pathToFile){
 	  console.log("changing page to " + pathToFile);
@@ -22,7 +21,7 @@ function prepareHomePage(){
 	var timelineData = parseDateOfData(generatedJSON, "All", "All");
 	var homeTimeline = makeTimeline(timelineData);
 
-  linkBarChartAndTimeline(homeBarChart,homeTimeline,"docLifeCycle");
+	linkBarChartAndTimeline(homeBarChart,homeTimeline,"docLifeCycle");
 
 	var pieChartData = parseData(generatedJSON,"userType");
 	var homePieChart = makePieChart(pieChartData,"userType");
@@ -47,7 +46,7 @@ function prepareStoragePage(){
 	var fileTypeData = parseFileTypeStorage(generatedJSON);
 	var fileTypeChart = makePieChart(fileTypeData,"category");
 //	adjustPieChartToSmall(usagePieChart);
-  disableAnimation(fileTypeChart);
+	disableAnimation(fileTypeChart);
 
 	linkStoragePieCharts(storagePieChart,fileTypeChart,"tenantId","docType");
 
@@ -68,6 +67,28 @@ function preparePiePage(){
 	var pieChartData = parseData(generatedJSON,"docLifeCycle");
 	var pieChart = makePieChart(pieChartData,"docLifeCycle");
 	displayChart("chartdiv1",pieChart);
+}
+
+function prepareGeographicPage(){
+	var geographicDataset = parseLocationOfData(generatedJSON);
+	var geographicChart = makeGeographicChart(geographicDataset);
+	
+	var fileTypeData = parseFileTypeStorage(generatedJSON);
+	var fileTypeChart = makePieChart(fileTypeData,"category");
+//	moveChartLegendToBottom(fileTypeChart);
+	removeChartLegend(fileTypeChart);
+	adjustPieChartToSmall(fileTypeChart);
+//	
+	var barChartData = parseData(generatedJSON,"docLifeCycle");
+	var homeBarChart = makeBarChart(barChartData, "docLifeCycle");
+	
+	linkGeographicChartAndPieChart(geographicChart,fileTypeChart,"location","b");
+	
+
+	displayChart("mapDiv",geographicChart);
+	displayChart("pieDiv",fileTypeChart);
+	displayChart("barDiv",homeBarChart);
+	
 }
 
 function applyTimelineOptions(){

@@ -1,17 +1,34 @@
 <script>
 $( document ).ready(function() {
-   makeUSHeatMap();
-   console.log("3.0");
+	 prepareGeographicPage()
 });
 </script>
 
-   <div id = "chartRegion">
-     <div class = "dropdown">
-       <select id = "geographicOptions" class="form-control select" onchange="createGeographic()">
-         <option value="US Heat Map">United States Activity Map</option>
-         <option value="Global Trends">Global Activity Map</option>
-       </select>
+<!--    <div id = "chartRegion"> -->
+<!--      <div class = "dropdown"> -->
+<!--        <select id = "geographicOptions" class="form-control select" onchange="createGeographic()"> -->
+<!--          <option value="US Heat Map">United States Activity Map</option> -->
+<!--          <option value="Global Trends">Global Activity Map</option> -->
+<!--        </select> -->
 
-     </div>
-     <div id="chartdiv"> </div>
-    </div>
+<!--      </div> -->
+<!--      <div id="chartdiv"> </div> -->
+<!--     </div> -->
+
+<div class="row" id="geographicPageChartRegion">
+	<div class="col-xs-8 geographicColumn">
+		<div class="geographicChartSpace" id="mapDiv"></div>
+	</div>
+	<div class="col-xs-4 geographicColumn">
+		<div class="row geographicRightColumnBox">
+			<div class="col-xs-12 geographicChartSpace">
+				<div class="geographicRightColumnChart" id="pieDiv"></div>
+			</div>
+		</div>
+		<div class="row geographicRightColumnBox">
+			<div class="col-xs-12 geographicChartSpace">
+				<div class="geographicRightColumnChart" id="barDiv"></div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -71,6 +71,20 @@ function getRandomValues(field){
   else if(field == "docSize"){
 	  return rand(0.3,8.1)
   }
+  else if(field == "location"){
+	  var location_categories = 	["US-AL", "US-AK", "US-AZ", "US-AR", "US-CA", "US-CO", "US-CT", "US-DE", "US-FL", "US-GA", 
+	                                 "US-HI", "US-ID", "US-IL", "US-IN", "US-IA", "US-KS", "US-KY", "US-LA", "US-ME", "US-MD",
+	                                 "US-MA", "US-MI", "US-MN", "US-MS", "US-MO", "US-MT", "US-NE", "US-NV", "US-NH", "US-NJ",
+	                                 "US-NM", "US-NY", "US-NC", "US-ND", "US-OH", "US-OK", "US-OR", "US-PA", "US-RI", "US-SC",
+	                                 "US-SD", "US-TN", "US-TX", "US-UT", "US-VT", "US-VA", "US-WA", "US-WV", "US-WI", "US-WY",
+	                                 ]
+	  var weight = [.01, .01, .02, .02, .4, .1, .00, .02, .1, .02, //0.7
+	                .02, .01, .02, .02, .02, .01, .02, .00, .02, .01,//0.15
+	                .02, .02, .00, .02, .02, .02, .02, .00, .02, .02,//0.16
+	                .02, .15, .02, .00, .02, .02, .02, .02, .02, .00,//0.29
+	                .00, .02, .15, .02, .02, .02, .1, .02, .00, .00,]//0.25
+	  return getRandomItem(location_categories, weight);
+	  }
 }
 
 //generate a list of x number of JSON objects, each represent 1 log entry
@@ -93,6 +107,7 @@ function generateJSON(numberOfLogs){
           "docSize": getRandomValues("docSize"),
           //new category source device
           "sourceDevice" : getRandomValues("sourceDevice"),
+          "location": getRandomValues("location"),
           "userType" : getRandomValues("userType"),
           "id": getRandomValues("id"),
           "logDate": randDate,
