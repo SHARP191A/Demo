@@ -3,7 +3,8 @@ function parseData(dataset, column){
 	var resultJSON = [];
 	var map = new Map();
 	var rowLength = dataset.length;
-
+  if (column != "eventId") rowLength = dataset.length/3;
+	
 	for(var i=0; i < rowLength; i++){
 		var key = dataset[i][column];
 		if(map.has(key)){

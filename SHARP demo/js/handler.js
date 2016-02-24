@@ -1,8 +1,8 @@
 var currentPage = "";
 
 //function to mimic sync to database
-function randomizeData() {  
-  generatedJSON = generateJSON(1000);
+function randomizeData() {
+  generatedJSON = generateJSON(rand(1000,10000));
   console.log("randomize data");
   changePage(currentPage);
 }
@@ -29,6 +29,7 @@ function prepareHomePage(){
 	removeChartLegend(homePieChart);
 
 	setTotalNumberLogs(generatedJSON);
+  setnumberUsers(generatedJSON);
 	setAverageStoragePerPrincipal(generatedJSON);
 
 	displayChart("chartSpace1",homeBarChart);
@@ -72,23 +73,23 @@ function preparePiePage(){
 function prepareGeographicPage(){
 	var geographicDataset = parseLocationOfData(generatedJSON);
 	var geographicChart = makeGeographicChart(geographicDataset);
-	
+
 	var fileTypeData = parseFileTypeStorage(generatedJSON);
 	var fileTypeChart = makePieChart(fileTypeData,"category");
 //	moveChartLegendToBottom(fileTypeChart);
 	removeChartLegend(fileTypeChart);
 	adjustPieChartToSmall(fileTypeChart);
-//	
+//
 	var barChartData = parseData(generatedJSON,"docLifeCycle");
 	var homeBarChart = makeBarChart(barChartData, "docLifeCycle");
-	
+
 	linkGeographicChartAndPieChart(geographicChart,fileTypeChart,"location","b");
-	
+
 
 	displayChart("mapDiv",geographicChart);
 	displayChart("pieDiv",fileTypeChart);
 	displayChart("barDiv",homeBarChart);
-	
+
 }
 
 function applyTimelineOptions(){
@@ -119,6 +120,10 @@ function applyPieOptions(){
 
 function setTotalNumberLogs(dataset){
 	document.getElementById("totalNumberLogs").innerHTML = dataset.length + " logs";
+}
+
+function setnumberUsers(dataset){
+	document.getElementById("numberOfUsers").innerHTML = Math.ceil(dataset.length/3) + " users";
 }
 
 function setAverageStoragePerPrincipal(dataset){

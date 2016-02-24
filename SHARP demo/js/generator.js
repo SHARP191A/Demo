@@ -1,5 +1,6 @@
 //generated list of n number of JSON objects
-var generatedJSON = generateJSON(1000);
+var generatedJSON = generateJSON(rand(1000,10000));
+
 
 //helper functions to randomly choose an item from a list with the given weights
 function randomDate(start, end) {
@@ -72,7 +73,7 @@ function getRandomValues(field){
 	  return rand(0.3,8.1)
   }
   else if(field == "location"){
-	  var location_categories = 	["US-AL", "US-AK", "US-AZ", "US-AR", "US-CA", "US-CO", "US-CT", "US-DE", "US-FL", "US-GA", 
+	  var location_categories = 	["US-AL", "US-AK", "US-AZ", "US-AR", "US-CA", "US-CO", "US-CT", "US-DE", "US-FL", "US-GA",
 	                                 "US-HI", "US-ID", "US-IL", "US-IN", "US-IA", "US-KS", "US-KY", "US-LA", "US-ME", "US-MD",
 	                                 "US-MA", "US-MI", "US-MN", "US-MS", "US-MO", "US-MT", "US-NE", "US-NV", "US-NH", "US-NJ",
 	                                 "US-NM", "US-NY", "US-NC", "US-ND", "US-OH", "US-OK", "US-OR", "US-PA", "US-RI", "US-SC",
