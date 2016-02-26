@@ -20,6 +20,12 @@ h1#headerTitle{
 
 }
 
+img{
+    max-width: 100%;
+    height: auto;
+    width: auto\9; /* ie8 */
+}
+
 img#sharpLogo{
 	width:23%;
 	float:left;
