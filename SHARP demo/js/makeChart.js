@@ -85,6 +85,12 @@ function makeBarChart(dataset, column) {
     "marginRight": 100,
     "autoMargins": true
   }
+  barChart.addListener("clickGraphItem",function(e){
+    console.log(e);
+    console.log(e.item.category);
+    e.chart.fillColorsR = "#FFFFFF";
+  })
+
   return barChart;
 }
 
@@ -151,7 +157,7 @@ function linkBarChartAndTimeline(mainChart, slaveChart, masterColumn, slaveColum
 			else{
 				var filteredLogs = filterLogs(generatedJSON,masterColumn,currentClicked);
 				var newSubset = parseDateOfData(filteredLogs,"All","All");
-				
+
 				slaveChart.dataProvider = newSubset;
 				slaveChart.validateData();
 				slaveChart.animateAgain();
@@ -167,14 +173,14 @@ function linkGeographicChartAndPieChart(mainChart,slaveChart, masterColumn, slav
 		var filteredLogs = filterLogs(generatedJSON, masterColumn, id);
 		var dataSubset = parseTenantCPOUsage(filteredLogs)
 		slaveChart.dataProvider = dataSubset;
-		
+
 		slaveChart.validateData();
 		slaveChart.animateAgain();
 	});
 	mainChart.addListener("homeButtonClicked",function(e){
 		console.log("clickedHomeButton");
 		slaveChart.dataProvider = parseTenantCPOUsage(generatedJSON);
-		
+
 		slaveChart.validateData();
 		slaveChart.animateAgain();
 	})
