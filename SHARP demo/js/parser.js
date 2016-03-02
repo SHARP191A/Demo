@@ -124,24 +124,26 @@ function parseTenantCount(dataset){
 	return tenantsArray.length;
 }
 
-//return all logs in specified dataset where the value of CATEGORY == VALUE
-function filterLogs(dataset,category, value){
-	var result = [];
-	if(category=="tenantId"){
-		for(var i of dataset){
-			if(i["extended"]["tenantId"]==value){
-				result.push(i);
-			}
+function parsePrincipalStorageUsage(dataset){
+	var resultJSON = [];
+	var principalMap = new Map();
+	
+	for(var i of dataset){
+		var principalId = i["principalName"];
+		var docSize = parseFloat(i["docSize"]).toFixed(2);
+		if(principalMap.has(principalId)){
+			var currentStorage = principalMap.get(principalId);
+			var newStorage = parseFloat(currentStorage + docSize).toFixed(2);
+			principalMap.set(principalId,newStorage);
+		}
+		else{
+			principalMap.set(principalId,docSize);
 		}
 	}
-	else{
-		for (var i of dataset){
-			if(i[category] == value){
-				result.push(i)
-			}
-		}
+	for(var key of principalMap.keys()){
+		resultJSON.push({category: key, units: principalMap.get(key)});
 	}
-	return result;
+	return resultJSON.sort(valueCompare);
 }
 
 //return array of objects mapping tenant to storage usage
@@ -151,14 +153,14 @@ function parseTenantStorageUsage(dataset){
 
 	for(var i of dataset){
 		var tenantId = i["extended"]["tenantId"];
-		var docSize = i["docSize"];
+		var docSize = parseFloat(i["docSize"]).toFixed(2);
 		if(tenantMap.has(tenantId)){
 			var currentStorage = tenantMap.get(tenantId);
 			var newStorage = parseFloat(currentStorage+docSize).toFixed(2);
 			tenantMap.set(tenantId,newStorage);
 		}
 		else{
-			tenantMap.set(tenantId,docSize.toFixed(2));
+			tenantMap.set(tenantId,docSize);
 		}
 	}
 	for(var key of tenantMap.keys()){
@@ -240,4 +242,36 @@ function dateFilter(dataset,dateFilter){
 		}
 	}
 	return resultJSON;
+}
+
+//return all logs in specified dataset where the value of CATEGORY == VALUE
+function filterLogs(dataset,category, value){
+	var result = [];
+	if(category=="tenantId"){
+		for(var i of dataset){
+			if(i["extended"]["tenantId"]==value){
+				result.push(i);
+			}
+		}
+	}
+	else{
+		for (var i of dataset){
+			if(i[category] == value){
+				result.push(i)
+			}
+		}
+	}
+	return result;
+}
+
+function valueCompare(a,b){
+	if(a.units > b.units){
+		return -1;
+	}
+	if(a.units < b.units){
+		return 1;
+	}
+	if(a.units == b.units){
+		return 0;
+	}
 }

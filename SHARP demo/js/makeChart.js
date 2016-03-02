@@ -68,16 +68,19 @@ function makeBarChart(dataset, column) {
   barChart.graphs = [{
     "type": "column",
     "valueField": "units",
-    "fillAlphas": 0.8
+    "fillAlphas": 0.25,
+    "fillColorsField": "fill",
+    "alphaField": "alpha"
   }];
   barChart.categoryField = column;
   barChart.dataProvider = dataset;
-
+  barChart.colors = ["#67b7dc"]
   //cosmetic changes
   barChart.categoryAxis.gridAlpha = 0;
-  barChart.colors = ["#67b7dc"];
   barChart.startAlpha = 1;
-
+  
+  barChart.zoomed = false;
+  barChart.previousClickedColumn = undefined;
 
   barChart.legend = {
     "enabled": false,
@@ -85,9 +88,33 @@ function makeBarChart(dataset, column) {
     "marginRight": 100,
     "autoMargins": true
   }
+  
+  barChart.addListener("clickGraphItem", function(e){
+	  if (barChart.zoomed == false){
+		  e.item.dataContext.alpha = 1;
+		  barChart.previousClickedColumn = e.item.dataContext;
+		  barChart.zoomed = true;
+		  e.chart.validateData();
+	  }
+	  else{
+		  if(barChart.previousClickedColumn == e.item.dataContext){
+			  barChart.zoomed = false;
+			  barChart.previousClickedColumn = undefined;
+			  e.item.dataContext.alpha = 0.25;
+			  
+		  }
+		  else{
+			  barChart.zoomed = true;
+			  barChart.previousClickedColumn.alpha = 0.25;
+			  barChart.previousClickedColumn = e.item.dataContext;
+			  e.item.dataContext.alpha = 1;
+		  }
+		  e.chart.validateData();
+	  }
+	  
+  });
   return barChart;
 }
-
 
 function makeGeographicChart(dataset){
 	var geographicChart = new AmCharts.AmMap();
@@ -151,6 +178,9 @@ function linkBarChartAndTimeline(mainChart, slaveChart, masterColumn, slaveColum
 			else{
 				var filteredLogs = filterLogs(generatedJSON,masterColumn,currentClicked);
 				var newSubset = parseDateOfData(filteredLogs,"All","All");
+				
+				slaveChart.zoomed = true;
+				slaveChart.previousClicked = currentClicked;
 				
 				slaveChart.dataProvider = newSubset;
 				slaveChart.validateData();

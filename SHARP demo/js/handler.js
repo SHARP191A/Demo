@@ -48,6 +48,10 @@ function prepareStoragePage(){
 	var fileTypeChart = makePieChart(fileTypeData,"category");
 //	adjustPieChartToSmall(usagePieChart);
 	disableAnimation(fileTypeChart);
+	removeChartLegend(fileTypeChart);
+	
+	var userStorageData = parsePrincipalStorageUsage(generatedJSON);
+	userStorageData = userStorageData.slice(0,5);
 
 	linkStoragePieCharts(storagePieChart,fileTypeChart,"tenantId","docType");
 
