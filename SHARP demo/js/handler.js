@@ -27,6 +27,7 @@ function prepareHomePage(){
 	var homePieChart = makePieChart(pieChartData,"userType");
 	adjustPieChartToSmall(homePieChart);
 	removeChartLegend(homePieChart);
+  moveChartLegendToBottom(homePieChart);
 
 	setTotalNumberLogs(generatedJSON);
   setnumberUsers(generatedJSON);
@@ -34,7 +35,11 @@ function prepareHomePage(){
 
 	displayChart("chartSpace1",homeBarChart);
 	displayChart("chartSpace2",homeTimeline);
-	displayChart("right1",homePieChart);
+	displayChart("right1chart",homePieChart);
+
+  var userStorageData = parsePrincipalStorageUsage(generatedJSON);
+  userStorageData = userStorageData.slice(0,5);
+  makeUserStorageTable("tableRows",userStorageData);
 
 }
 
@@ -49,14 +54,16 @@ function prepareStoragePage(){
 //	adjustPieChartToSmall(usagePieChart);
 	disableAnimation(fileTypeChart);
 	removeChartLegend(fileTypeChart);
-	
+
 	var userStorageData = parsePrincipalStorageUsage(generatedJSON);
 	userStorageData = userStorageData.slice(0,5);
+  makeUserStorageTable("tableRows",userStorageData);
 
 	linkStoragePieCharts(storagePieChart,fileTypeChart,"tenantId","docType");
 
 	displayChart("chartdiv1",storagePieChart);
 	displayChart("chartdiv2",fileTypeChart);
+
 }
 
 function prepareDocumentsPage(){
@@ -83,15 +90,21 @@ function prepareGeographicPage(){
 	moveChartLegendToBottom(tenantUsageChart);
 //	removeChartLegend(tenantUsageChart);
 	adjustPieChartToSmall(tenantUsageChart);
-//
-	var barChartData = parseData(generatedJSON,"docLifeCycle");
-	var homeBarChart = makeBarChart(barChartData, "docLifeCycle");
+
+	//var barChartData = parseData(generatedJSON,"docLifeCycle");
+	//var homeBarChart = makeBarChart(barChartData, "docLifeCycle");
+
+  setSelectedArea("USA");
+  setMostActiveTenant(generatedJSON);
+  setTotalStorageUsed(generatedJSON);
+  setNumberOfUsers(generatedJSON);
+  setAverageStoragePerUserInArea(generatedJSON);
 
 	linkGeographicChartAndPieChart(geographicChart,tenantUsageChart,"location","b");
 
 	displayChart("mapDiv",geographicChart);
 	displayChart("pieDiv",tenantUsageChart);
-	displayChart("barDiv",homeBarChart);
+	//displayChart("barDiv",homeBarChart);
 
 }
 
@@ -134,4 +147,34 @@ function setAverageStoragePerPrincipal(dataset){
 	var totalStorage = parseTotalStorage(dataset);
 	var average = (totalStorage/principalCount).toFixed(2);
 	document.getElementById("averageStoragePerPrincipal").innerHTML = average + " MB";
+}
+
+function setSelectedArea(area){
+	document.getElementById("selectedArea").innerHTML = area;
+}
+
+
+function setMostActiveTenant(dataset){
+	var tenantMap = parseTenantCPOUsage(dataset);
+	var topTenant = tenantMap.sort(valueCompare)[0];
+	console.log(topTenant[0]);
+	document.getElementById("mostActiveTenant").innerHTML = topTenant.category;
+}
+
+function setTotalStorageUsed(dataset){
+	var storage = parseTotalStorage(dataset);
+	document.getElementById("totalStorageUsed").innerHTML = storage.toFixed(2) + " GB";
+}
+
+
+function setNumberOfUsers(dataset){
+	var userCount = parsePrincipalCount(dataset);
+	document.getElementById("numberOfUsers").innerHTML = userCount;
+}
+
+function setAverageStoragePerUserInArea(dataset){
+	var principalCount = parsePrincipalCount(dataset);
+	var totalStorage = parseTotalStorage(dataset);
+	var average = (totalStorage/principalCount).toFixed(2);
+	document.getElementById("averageStoragePerUser").innerHTML = average + " MB";
 }

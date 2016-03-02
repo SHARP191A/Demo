@@ -1,10 +1,13 @@
+html{
+	height:100%;
+}
 body{
-	padding:20px;
+	padding:0px;
 	width:100%;
-	margin: auto;
+	height:100%;
+	margin: 0px;
 	background-color: #000016;
 }
-
 div#header{
 	margin:auto;
 	padding-top: 1%;
@@ -32,10 +35,6 @@ img#sharpLogo{
 	padding-right: 12px;
 	padding-left: 70px;
 	margin-top:0px;
-	margin-bottom: 0px;
-}
-
-hr{
 	margin-bottom: 0px;
 }
 
@@ -69,9 +68,6 @@ div#chartRegion{
 	font-size	: 11px;
 }
 
-
-
-
 #icon{
 	 width: 240px;
 	 padding-left:35px;
@@ -84,18 +80,6 @@ h2{
 }
 h4{
 	padding-left:30px;
-}
-
-html{
-	height:100%;
-}
-
-body{
-	padding:0px;
-	width:100%;
-	height:100%;
-	margin: 0px;
-	background-color: #000016;
 }
 
 .pageContent{
@@ -116,7 +100,6 @@ body{
 	height: 100%;
 	overflow:visible;
 	border-radius:10px;
-/* 	display: table; */
 
 }
 
@@ -125,8 +108,6 @@ body{
 	background-color: white;
 	border-radius:10px;
 	text-align:center;
-/* 	display: table-cell; */
-/* 	vertical-align: middle; */
 
 }
 
@@ -135,6 +116,15 @@ body{
 	background-color:white;
 	border-radius:10px;
 	text-align:center;
+}
+
+div#right1chart{
+	padding-top: 20px;
+	height:70%;
+}
+
+.th-center{
+	text-align: center;
 }
 
 .chartsColumn{
@@ -153,6 +143,14 @@ body{
 	background-color: #D2D2D2;
 	text-align:center;
 	border-radius:10px;
+}
+
+.largestChartSpaceRow{
+	height:75%;
+	background-color: #D2D2D2;
+	text-align:center;
+	border-radius:10px;
+	padding-top: 10px;
 }
 
 .chartSpace{

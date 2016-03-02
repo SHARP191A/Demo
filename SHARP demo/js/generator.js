@@ -49,7 +49,7 @@ function getRandomValues(field){
   else if (field == "tenantId"){
 	  //5 tenants
     var tenantId_categories = ["United Postal Service", "FedEx", "SHARP", "Intel", "UCI ICS"];
-    var weight = [.2, .1, .4, .25, .05];
+    var weight = [.2, .15, .35, .25, .05];
     return getRandomItem(tenantId_categories,weight);
   }
   else if (field == "userType"){

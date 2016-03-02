@@ -9,21 +9,30 @@
 	</div>
 	<div class="col-xs-10 chartsColumn">
 		<div class="row largerChartSpaceRow">
-			<label class="homepageLabel">Storage Used per Tenant</label>
+			<label class="homepageLabel">Storage Used per Tenant (TB)</label>
 			<div class="col-xs-12 chartSpace" id="chartdiv1">
 			</div>
 		</div>
 		<div class="row chartSpace">
 			<div class="col-xs-6 largerChartSpaceRow">
-				<label class="homepageLabel">Storage By File Type</label>
+				<label class="homepageLabel">File Type Breakdown</label>
 				<div class="col-xs-12 chartSpace" id="chartdiv2"></div>
 			</div>
 			<div class="col-xs-6 largerChartSpaceRow">
-				<label class="homepageLabel">Top 5 Users For Selected Tenant</label>
-				<div class="col-xs-12 chartSpace"></div>
+				<label class="homepageLabel">Top Users for Selected Tenant</label>
+				<div class="col-xs-12 chartSpace" id="chartdiv3">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th class = "th-center">User ID</th>
+								<th class = "th-center">Storage</th>
+							</tr>
+						</thead>
+						<tbody id = "tableRows">
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
-	</div>
-	<div class="col-xs-1 sideColumn" id="rightColumn">
 	</div>
 </div>

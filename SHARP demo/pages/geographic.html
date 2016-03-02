@@ -1,7 +1,7 @@
 <script>
-$( document ).ready(function() {
-	 prepareGeographicPage()
-});
+	$(document).ready(function() {
+		prepareGeographicPage()
+	});
 </script>
 
 <div class="row" id="geographicPageChartRegion">
@@ -9,14 +9,38 @@ $( document ).ready(function() {
 		<div class="geographicChartSpace" id="mapDiv"></div>
 	</div>
 	<div class="col-xs-4 geographicColumn">
-		<div class="row geographicRightColumnBox">
+		<div class="row geographicRightColumnPieChart">
 			<div class="col-xs-12 geographicChartSpace">
+				<label class = "homepageLabel">Number of Logs Generated</label>
 				<div class="geographicRightColumnChart" id="pieDiv"></div>
 			</div>
 		</div>
 		<div class="row geographicRightColumnBox">
 			<div class="col-xs-12 geographicChartSpace">
-				<div class="geographicRightColumnChart" id="barDiv"></div>
+				<table class="table table-striped table-bordered">
+					<thead>
+						<tr>
+							<th>Category</th>
+							<th>Value (<span id="selectedArea"></span>)</th>
+						</tr>
+					</thead>
+					<tr>
+						<td>Most Active: </td>
+						<td id="mostActiveTenant"></td>
+					</tr>
+					<tr>
+						<td>Total Storage Used: </td>
+						<td id="totalStorageUsed"></td>
+					</tr>
+					<tr>
+						<td>Number of Users: </td>
+						<td id="numberOfUsers"></td>
+					</tr>
+					<tr>
+						<td>Average Storage Per User:</td>
+						<td id="averageStoragePerUser"></td>
+					</tr>
+				</table>
 			</div>
 		</div>
 	</div>
